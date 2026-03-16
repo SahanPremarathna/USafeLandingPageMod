@@ -1,0 +1,84 @@
+:root {
+    --color-bg: #030712;
+    --color-bg-soft: #07111f;
+    --color-panel: rgba(9, 18, 34, 0.74);
+    --color-panel-strong: rgba(8, 16, 31, 0.9);
+    --color-border: rgba(123, 155, 201, 0.16);
+    --color-text: rgba(241, 246, 255, 0.95);
+    --color-text-soft: rgba(180, 192, 214, 0.78);
+    --color-primary: #35d5ff;
+    --color-primary-strong: #1194ff;
+    --color-accent: #7af0b2;
+    --color-danger: #ff5b7f;
+    --shadow-panel: 0 28px 80px rgba(0, 0, 0, 0.34);
+    --container-width: 1240px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: auto;
+}
+
+body {
+    font-family: "Manrope", sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(17, 148, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 82% 12%, rgba(53, 213, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, #030712 0%, #07111f 30%, #081221 56%, #030712 100%);
+    color: var(--color-text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        linear-gradient(rgba(102, 163, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(102, 163, 255, 0.045) 1px, transparent 1px);
+    background-size: 88px 88px;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 88%);
+}
+
+img,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+a {
+    color: inherit;
+}
+
+button {
+    border: 0;
+    background: none;
+    font: inherit;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Sora", sans-serif;
+}
+
+ul {
+    list-style: none;
+}

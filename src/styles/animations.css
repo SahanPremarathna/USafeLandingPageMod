@@ -1,0 +1,102 @@
+[data-reveal] {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes radarPulse {
+    0% {
+        transform: scale(0.86);
+        opacity: 0.72;
+    }
+    100% {
+        transform: scale(1.18);
+        opacity: 0;
+    }
+}
+
+@keyframes routePulse {
+    0% {
+        transform: translateY(-50%) translateX(-30px);
+        opacity: 0;
+    }
+    35%,
+    65% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50%) translateX(90px);
+        opacity: 0;
+    }
+}
+
+.radar-zone::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: inherit;
+    border: 1px solid currentColor;
+    opacity: 0.18;
+    animation: radarPulse 3.6s ease-out infinite;
+}
+
+.radar-zone-safe {
+    color: rgba(53, 213, 255, 0.5);
+}
+
+.radar-zone-danger {
+    color: rgba(255, 91, 127, 0.34);
+}
+
+.map-route::after {
+    content: "";
+    position: absolute;
+    right: 16%;
+    top: 50%;
+    width: 72px;
+    height: 8px;
+    transform: translateY(-50%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+    animation: routePulse 3.4s ease-in-out infinite;
+}
+
+.ring-one {
+    animation: ringPulse 5s ease-in-out infinite;
+}
+
+.ring-two {
+    animation: ringPulse 7s ease-in-out infinite;
+}
+
+.ring-three {
+    animation: ringPulse 8.5s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: translate(-50%, -50%) scale(0.98);
+    }
+    50% {
+        opacity: 0.85;
+        transform: translate(-50%, -50%) scale(1.03);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .interactive-card,
+    .ring-one,
+    .ring-two,
+    .ring-three,
+    .radar-zone::after,
+    .map-route::after {
+        animation: none;
+        transition: none;
+        transform: none;
+    }
+
+    [data-reveal] {
+        opacity: 1;
+        visibility: visible;
+    }
+}
