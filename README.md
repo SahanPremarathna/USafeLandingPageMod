@@ -94,7 +94,7 @@ index.html       Main Vite entry HTML
 - The root also contains older standalone HTML files like `tempSplash.html`, `splash2.html`, `team.html`, and other pages which are separate from the main Vite app boot in `index.html`.
 - If you change media under `images/` or content under `src/content/`, rerun `npm run build` before deployment.
 
-## Deployment
+## Deployment :
 
 Deploy the contents of `dist/` after running:
 
