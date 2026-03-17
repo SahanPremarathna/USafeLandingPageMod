@@ -180,19 +180,26 @@ function renderUnifiedSection(unified) {
         '    <div class="narrative-glow narrative-glow-b"></div>',
         '  </div>',
         '  <div class="page-container">',
-        '    <div class="team-narrative-panel glass-panel">',
-        '      <div class="team-narrative-intro">',
-        '        <span class="section-kicker" data-team-reveal>' + unified.kicker + '</span>',
-        '        <h2 data-team-reveal data-team-delay="40">' + unified.title + '</h2>',
+        '    <div class="team-narrative-panel">',
+        '      <div class="team-narrative-ambient" aria-hidden="true">',
+        '        <div class="team-narrative-symbol">U</div>',
+        '        <div class="team-narrative-divider"></div>',
         '      </div>',
-        '      <div class="team-narrative-body">',
-                unified.paragraphs.map(function (paragraph, index) {
-                    return '<p data-team-reveal data-team-delay="' + String(90 + (index * 55)) + '">' + paragraph + '</p>';
-                }).join(''),
-        '      </div>',
-        '      <div class="team-actions team-narrative-actions" data-team-reveal data-team-delay="420">',
-        '        <a class="button button-primary" href="' + unified.primaryCta.href + '">' + unified.primaryCta.label + '</a>',
-        '        <a class="button button-secondary" href="' + unified.secondaryCta.href + '">' + unified.secondaryCta.label + '</a>',
+        '      <div class="team-narrative-copy">',
+        '        <div class="team-narrative-intro">',
+        '          <span class="section-kicker" data-team-reveal>' + unified.kicker + '</span>',
+        '          <h2 data-team-reveal data-team-delay="40">' + unified.title + '</h2>',
+        '          <div class="team-narrative-copy-divider" aria-hidden="true"></div>',
+        '        </div>',
+        '        <div class="team-narrative-body">',
+                    unified.paragraphs.map(function (paragraph, index) {
+                        return '<p data-team-reveal data-team-delay="' + String(90 + (index * 55)) + '">' + paragraph + '</p>';
+                    }).join(''),
+        '        </div>',
+        '        <div class="team-actions team-narrative-actions" data-team-reveal data-team-delay="420">',
+        '          <a class="button button-primary" href="' + unified.primaryCta.href + '">' + unified.primaryCta.label + '</a>',
+        '          <a class="button button-secondary" href="' + unified.secondaryCta.href + '">' + unified.secondaryCta.label + '</a>',
+        '        </div>',
         '      </div>',
         '    </div>',
         '  </div>',
@@ -291,5 +298,6 @@ function initTeamPage() {
 }
 
 initTeamPage();
+
 
 

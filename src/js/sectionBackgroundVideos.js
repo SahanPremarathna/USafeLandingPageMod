@@ -30,8 +30,22 @@ export function initSectionBackgroundVideos(sectionMedia) {
         }
 
         video.dataset.currentSrc = src;
+        video.autoplay = true;
+        video.muted = true;
+        video.defaultMuted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('autoplay', '');
+        video.setAttribute('playsinline', '');
         video.src = src;
         video.load();
+        video.addEventListener('loadeddata', function handleLoaded() {
+            video.removeEventListener('loadeddata', handleLoaded);
+            video.play().catch(function () {
+                return undefined;
+            });
+        }, { once: true });
         video.play().catch(function () {
             return undefined;
         });

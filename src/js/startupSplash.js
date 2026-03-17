@@ -119,13 +119,11 @@ export function createLoadingIndicator(options) {
 
 function createStartupOverlay(logoSrc) {
     var existing = document.querySelector(".startup-overlay");
-    if (existing) {
-        existing.remove();
-    }
+    var overlay = existing || document.createElement("div");
 
-    var overlay = document.createElement("div");
     overlay.className = "startup-overlay";
     overlay.dataset.startupState = "showing";
+    overlay.removeAttribute("data-startup-shell");
     overlay.innerHTML = [
         '<div class="startup-backdrop"></div>',
         '<div class="startup-shell">',
@@ -146,7 +144,9 @@ function createStartupOverlay(logoSrc) {
         '</div>'
     ].join("");
 
-    document.body.appendChild(overlay);
+    if (!existing) {
+        document.body.appendChild(overlay);
+    }
 
     return {
         root: overlay,

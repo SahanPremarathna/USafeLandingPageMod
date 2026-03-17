@@ -45,37 +45,38 @@
     }
 
     function createOverlay(logoSrc) {
-        var existing = document.querySelector(".startup-overlay");
-        if (existing) {
-            existing.remove();
-        }
+    var existing = document.querySelector(".startup-overlay");
+    var overlay = existing || document.createElement("div");
 
-        var overlay = document.createElement("div");
-        overlay.className = "startup-overlay";
-        overlay.dataset.startupState = "showing";
-        overlay.innerHTML = [
-            '<div class="startup-backdrop"></div>',
-            '<div class="startup-shell">',
-            '  <div class="startup-intro" aria-hidden="true">',
-            '    <div class="startup-emitter">',
-            '      <span class="startup-ripple startup-ripple-a"></span>',
-            '      <span class="startup-ripple startup-ripple-b"></span>',
-            '      <span class="startup-ripple startup-ripple-c"></span>',
-            '      <span class="startup-ripple startup-ripple-d"></span>',
-            '      <span class="startup-orbit startup-orbit-a"></span>',
-            '      <span class="startup-orbit startup-orbit-b"></span>',
-            '      <span class="startup-core-glow"></span>',
-            '    </div>',
-            '    <div class="startup-brand-mark">',
-            '      <img src="', logoSrc, '" alt="USafe logo">',
-            '    </div>',
-            '  </div>',
-            '</div>'
-        ].join("");
+    overlay.className = "startup-overlay";
+    overlay.dataset.startupState = "showing";
+    overlay.removeAttribute("data-startup-shell");
+    overlay.innerHTML = [
+        '<div class="startup-backdrop"></div>',
+        '<div class="startup-shell">',
+        '  <div class="startup-intro" aria-hidden="true">',
+        '    <div class="startup-emitter">',
+        '      <span class="startup-ripple startup-ripple-a"></span>',
+        '      <span class="startup-ripple startup-ripple-b"></span>',
+        '      <span class="startup-ripple startup-ripple-c"></span>',
+        '      <span class="startup-ripple startup-ripple-d"></span>',
+        '      <span class="startup-orbit startup-orbit-a"></span>',
+        '      <span class="startup-orbit startup-orbit-b"></span>',
+        '      <span class="startup-core-glow"></span>',
+        '    </div>',
+        '    <div class="startup-brand-mark">',
+        '      <img src="', logoSrc, '" alt="USafe logo">',
+        '    </div>',
+        '  </div>',
+        '</div>'
+    ].join("");
 
+    if (!existing) {
         document.body.appendChild(overlay);
-        return overlay;
     }
+
+    return overlay;
+}
 
     async function runSplash(minDuration, waitForLoad) {
         if (!document.body || activeRun) {

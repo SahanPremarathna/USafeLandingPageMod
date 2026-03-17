@@ -1,3 +1,7 @@
+html.page-startup-pending body > :not(.startup-overlay) {
+    visibility: hidden;
+}
+
 .startup-active {
     overflow: hidden;
 }
