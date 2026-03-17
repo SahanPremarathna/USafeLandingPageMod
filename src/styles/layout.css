@@ -100,14 +100,44 @@
 }
 
 .nav-links a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
     color: var(--color-text-soft);
     font-size: 0.95rem;
     font-weight: 600;
-    transition: color 0.25s ease;
+    padding-bottom: 10px;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    transform: scaleX(0);
+    transform-origin: center;
+    opacity: 0;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
 }
 
 .nav-links a:hover {
     color: var(--color-text);
+}
+
+.nav-links a:hover::after,
+.nav-links a[aria-current="page"]::after {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+.nav-links a[aria-current="page"] {
+    color: rgba(255, 255, 255, 0.98);
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.12);
 }
 
 .nav-toggle {
@@ -139,6 +169,47 @@
 .story-section {
     --section-glow-opacity: 0.08;
 }
+
+.page-root > section.content-section:nth-of-type(even) {
+    position: relative;
+    --section-layer-top: rgba(10, 22, 44, 0.24);
+    --section-layer-bottom: rgba(3, 10, 22, 0.46);
+    --section-layer-glow: rgba(64, 126, 235, 0.16);
+}
+
+.page-root > section.content-section:nth-of-type(even)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background:
+        linear-gradient(180deg, var(--section-layer-top), var(--section-layer-bottom)),
+        radial-gradient(circle at 50% 14%, var(--section-layer-glow), transparent 34%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.page-root > section.content-section:nth-of-type(even) > * {
+    position: relative;
+    z-index: 1;
+}
+
+#problem,
+#community {
+    --section-layer-top: rgba(14, 28, 54, 0.26);
+    --section-layer-bottom: rgba(4, 12, 24, 0.5);
+    --section-layer-glow: rgba(86, 169, 255, 0.16);
+}
+
+#guardian,
+#final-cta {
+    --section-layer-top: rgba(10, 32, 52, 0.24);
+    --section-layer-bottom: rgba(3, 14, 26, 0.52);
+    --section-layer-glow: rgba(78, 214, 255, 0.14);
+}
+
 
 .story-section::before {
     content: "";
@@ -284,3 +355,11 @@
         align-items: flex-start;
     }
 }
+
+
+
+
+
+
+
+

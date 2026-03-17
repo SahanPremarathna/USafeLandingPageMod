@@ -3,9 +3,19 @@ export function initNavigation(lenis) {
     var toggle = document.getElementById("nav-toggle");
     var menu = document.getElementById("nav-menu");
     var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a, .nav-cta"));
+    var pageLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
     var lastScrollY = window.scrollY;
     var hideThreshold = 220;
     var deltaThreshold = 6;
+
+    pageLinks.forEach(function (link) {
+        var href = link.getAttribute("href") || "";
+        if (href === "#hero") {
+            link.setAttribute("aria-current", "page");
+        } else {
+            link.removeAttribute("aria-current");
+        }
+    });
 
     if (toggle && menu) {
         toggle.addEventListener("click", function () {

@@ -13,9 +13,6 @@ const usafeLandingContent = {
         hero: heroBgVideoUrl,
         problem: flyFree2VideoUrl,
         "how-it-works": flyFree3VideoUrl,
-        guardian: trailerVideoUrl,
-        intelligence: flyFree3VideoUrl,
-        community: flyFree2VideoUrl,
         vision: logoMotionVideoUrl,
         "final-cta": trailerVideoUrl,
         footer: heroBgVideoUrl
@@ -23,9 +20,8 @@ const usafeLandingContent = {
     navigation: {
         links: [
             { label: "Home", href: "#hero" },
-            { label: "How It Works", href: "#how-it-works" },
-            { label: "Guardian", href: "#guardian" },
-            { label: "Community", href: "#community" },
+            { label: "How It Works", href: "how-it-works.html" },
+            { label: "Team", href: "team.html" },
             { label: "Contact", href: "contact.html" }
         ],
         cta: { label: "Try USafe", href: "#final-cta" }
@@ -35,40 +31,46 @@ const usafeLandingContent = {
         titlePrefix: "See the",
         title: "See the danger before it sees you.",
         description: "USafe predicts risky areas, guides safer routes, and keeps trusted guardians aware of your journey in real time.",
-        primaryCta: { label: "Start Safer Journeys", href: "#final-cta" },
-        secondaryCta: { label: "See How It Works", href: "#how-it-works" },
+        primaryCta: { label: "Start Safer Journeys", href: "contact.html" },
+        secondaryCta: { label: "See How It Works", href: "how-it-works.html" },
         trustLine: "Built for modern cities. Designed for real people.",
         stats: [],
         floatingCards: []
     },
     problem: {
         label: "WHY USAFE",
-        title: "Because Safety Shouldn't Be Reactive",
-        intro: "Scroll through how ordinary tools stop at directions, and how USafe expands into awareness, prevention, and response.",
+        title: "Safety Should Be Predictive. Not Reactive.",
+        intro: "Most apps guide you. USafe protects you. Before, during, and after your journey.",
         stages: [
             {
-                title: "Protection, awareness, and response in one system.",
-                text: "USafe combines real-time safety intelligence, reliable SOS, silent emergency help, and guardian monitoring into one proactive safety platform.",
-                tone: "protect",
-                kicker: "Stage 1"
+                kicker: "Stage 1",
+                label: "Awareness",
+                title: "USafe detects risk before it becomes your problem.",
+                text: "Live route context, anomaly signals, and neighborhood patterns surface early so users move with clarity instead of guesswork.",
+                tone: "awareness",
+                chips: ["Live risk signals", "Radar scan", "Context-aware alerts"],
+                hudLabel: "Live Safety Layer",
+                hudValue: "Awareness Engine"
             },
             {
-                title: "The risk is left to you.",
-                text: "Traditional tools stop at directions and leave critical safety decisions entirely to the user.",
-                tone: "risk",
-                kicker: "Stage 2"
+                kicker: "Stage 2",
+                label: "Prevention",
+                title: "USafe steers people away from danger, not toward it.",
+                text: "Safer route intelligence weighs risk, hotspots, and route changes in real time so the best path is the one that protects you.",
+                tone: "prevention",
+                chips: ["Safer route logic", "Heatmap prediction", "Decision support"],
+                hudLabel: "Predictive Routing",
+                hudValue: "Prevention Engine"
             },
             {
-                title: "USafe sees more than the route.",
-                text: "USafe detects live risk, surfaces safer alternatives, and helps users move with more awareness.",
-                tone: "aware",
-                kicker: "Stage 3"
-            },
-            {
-                title: "Most apps help you move.",
-                text: "Directions, traffic, and arrival time ? but little awareness of personal safety.",
-                tone: "basic",
-                kicker: "Stage 4"
+                kicker: "Stage 3",
+                label: "Response",
+                title: "When something changes, help is already in motion.",
+                text: "Silent escalation, SOS triggers, and guardian coordination turn one moment of risk into an immediate support network.",
+                tone: "response",
+                chips: ["SOS pulse", "Silent emergency help", "Guardian sync"],
+                hudLabel: "Emergency Network",
+                hudValue: "Response Engine"
             }
         ]
     },
@@ -80,77 +82,45 @@ const usafeLandingContent = {
             {
                 icon: "fa-solid fa-shield-heart",
                 title: "Real-Time Safety Score",
-                description: "Continuous route scoring turns complex city signals into a simple confidence readout the user can understand at a glance."
+                description: "Continuous route scoring turns complex city signals into a simple confidence readout the user can understand at a glance.",
+                href: "how-it-works.html#feature-real-time-safety-score"
             },
             {
                 icon: "fa-solid fa-fire",
                 title: "Risk Heatmap",
-                description: "Dynamic hotspots show where caution is rising, helping users understand the shape of the environment around them."
+                description: "Dynamic hotspots show where caution is rising, helping users understand the shape of the environment around them.",
+                href: "how-it-works.html#feature-risk-heatmap"
             },
             {
                 icon: "fa-solid fa-route",
                 title: "Smart Safe Navigation",
-                description: "USafe suggests safer route options, not just faster ones, balancing movement, awareness, and risk reduction."
+                description: "USafe suggests safer route options, not just faster ones, balancing movement, awareness, and risk reduction.",
+                href: "how-it-works.html#feature-smart-safe-navigation"
             },
             {
                 icon: "fa-solid fa-bell",
                 title: "Emergency SOS",
-                description: "One action can trigger alerts, location sharing, and coordinated support when speed matters most."
+                description: "One action can trigger alerts, location sharing, and coordinated support when speed matters most.",
+                href: "how-it-works.html#feature-emergency-sos"
             },
             {
                 icon: "fa-solid fa-phone-volume",
                 title: "Silent Emergency Call",
-                description: "When speaking is unsafe, discreet escalation tools preserve the chance to act without drawing attention."
+                description: "When speaking is unsafe, discreet escalation tools preserve the chance to act without drawing attention.",
+                href: "how-it-works.html#feature-silent-emergency-call"
             }
-        ]
-    },
-    guardian: {
-        label: "SafePath Guardian",
-        title: "Guardian mode turns trusted people into a coordinated safety network.",
-        description: "SafePath Guardian gives selected contacts a secure browser-based dashboard with live journey visibility, checkpoint progress, and action-ready emergency status.",
-        capabilities: [
-            "Trusted contacts join through a secure live link",
-            "Browser dashboard shows route, status, and last known context",
-            "Checkpoint updates confirm progress without friction",
-            "Instant action protocol activates when the journey goes off track"
-        ],
-        panels: [
-            { title: "Secure Link", text: "Guardian access opens in seconds without app installation friction." },
-            { title: "Live Monitoring", text: "Contacts see movement, delays, and escalations from one focused dashboard." },
-            { title: "Checkpoint Updates", text: "Routine check-ins reduce uncertainty during higher-risk travel windows." },
-            { title: "Action Protocol", text: "When the system detects a serious break in pattern, support can move immediately." }
-        ]
-    },
-    intelligence: {
-        label: "AI Safety Intelligence",
-        title: "Predictive safety intelligence built to notice patterns people miss.",
-        description: "USafe combines route context, user movement, and evolving local signals to anticipate risk earlier and support calmer decisions under pressure.",
-        bullets: [
-            "Learns from route changes, environmental context, and anomaly signals",
-            "Turns raw safety data into proactive guidance instead of static information",
-            "Supports future-ready city safety workflows with explainable UI cues"
-        ]
-    },
-    community: {
-        label: "Community Reporting",
-        title: "A safety network gets stronger when people can warn each other clearly.",
-        description: "Community-powered reports help surface real local context fast, while the interface keeps signal quality readable instead of chaotic.",
-        bullets: [
-            "Citizens can flag hazards, suspicious activity, or blocked paths",
-            "Reports strengthen local awareness for the next person entering the area",
-            "The product balances human reports with system intelligence for better clarity"
         ]
     },
     vision: {
         label: "Vision",
-        title: "We believe navigation should feel protective, not indifferent.",
-        description: "USafe is building toward a future where movement through cities comes with live confidence, intelligent support, and a stronger sense of control."
+        title: "We believe safety should move with you, not follow behind you.",
+        description: "USafe envisions a world where every journey is guided by intelligence, protected in real time, and experienced with confidence and not uncertainty."
     },
     cta: {
         title: "Try the safety-first route experience people will actually trust.",
         description: "USafe combines proactive guidance, AI intelligence, and guardian support into one product designed for real-world movement.",
         primaryCta: { label: "Request Early Access", href: "contact.html" },
-        secondaryCta: { label: "Explore Features", href: "features.html" }
+        secondaryCta: { label: "Explore Features", href: "how-it-works.html" }
     },
     footer: {
         columns: [
@@ -158,24 +128,22 @@ const usafeLandingContent = {
                 title: "Navigation",
                 links: [
                     { label: "Home", href: "#hero" },
-                    { label: "How It Works", href: "#how-it-works" },
-                    { label: "Guardian", href: "#guardian" }
+                    { label: "How It Works", href: "how-it-works.html" },
+                    { label: "Team", href: "team.html" }
                 ]
             },
             {
                 title: "Features",
                 links: [
-                    { label: "AI Safety Intelligence", href: "#intelligence" },
-                    { label: "Community Reporting", href: "#community" },
                     { label: "Vision", href: "#vision" }
                 ]
             },
             {
                 title: "Company",
                 links: [
+                    { label: "Team", href: "team.html" },
                     { label: "Contact", href: "contact.html" },
-                    { label: "How It Works", href: "how-it-works.html" },
-                    { label: "Guardian", href: "#guardian" }
+                    { label: "How It Works", href: "how-it-works.html" }
                 ]
             },
             {
@@ -196,8 +164,3 @@ const usafeLandingContent = {
 };
 
 export default usafeLandingContent;
-
-
-
-
-

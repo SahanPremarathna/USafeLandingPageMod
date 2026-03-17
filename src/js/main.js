@@ -14,7 +14,7 @@ import { initNavigation } from "./navigation.js";
 import logoUrl from "../../images/usafelogo.webp";
 import heroPosterUrl from "../../images/pre_load_hero_bg.webp";
 import heroWebmUrl from "../../images/hero_bg.webm";
-import { runStartupSequence } from "./startupSplash.js";
+import { runStartupSequence, showPageTransitionSplash } from "./startupSplash.js";
 
 function applyMeta(meta) {
     document.title = meta.title;
@@ -84,6 +84,13 @@ async function boot() {
     applyMeta(usafeLandingContent.meta);
     document.body.classList.add("theme-usafe");
     renderLanding(app, usafeLandingContent);
+
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+            showPageTransitionSplash({ logoSrc: logoUrl, appEl: app, minDuration: 1000 });
+        }
+    });
+
     await runStartupSequence({
         appEl: app,
         logoSrc: logoUrl,

@@ -1,3 +1,8 @@
+var SESSION_KEY = "usafe_startup_seen";
+var FIRST_VISIT_HOLD_MS = 4000;
+var RETURN_VISIT_HOLD_MS = 1000;
+var EXIT_DURATION_MS = 820;
+
 function wait(ms) {
     return new Promise(function (resolve) {
         window.setTimeout(resolve, ms);
@@ -8,6 +13,25 @@ function uniqueSources(sources) {
     return sources.filter(function (src, index, list) {
         return Boolean(src) && list.indexOf(src) === index;
     });
+}
+
+function getStartupHoldDuration() {
+    try {
+        return window.sessionStorage && window.sessionStorage.getItem(SESSION_KEY)
+            ? RETURN_VISIT_HOLD_MS
+            : FIRST_VISIT_HOLD_MS;
+    } catch (error) {
+        return FIRST_VISIT_HOLD_MS;
+    }
+}
+
+function markStartupSeen() {
+    try {
+        if (window.sessionStorage) {
+            window.sessionStorage.setItem(SESSION_KEY, "1");
+        }
+    } catch (error) {
+    }
 }
 
 function preloadImage(src, timeoutMs) {
@@ -83,7 +107,7 @@ function renderLoadingIndicatorMarkup(logoSrc) {
         '    <img class="loading-indicator-logo" src="', logoSrc, '" alt="">',
         '  </div>',
         '</div>'
-    ].join('');
+    ].join("");
 }
 
 export function createLoadingIndicator(options) {
@@ -94,6 +118,11 @@ export function createLoadingIndicator(options) {
 }
 
 function createStartupOverlay(logoSrc) {
+    var existing = document.querySelector(".startup-overlay");
+    if (existing) {
+        existing.remove();
+    }
+
     var overlay = document.createElement("div");
     overlay.className = "startup-overlay";
     overlay.dataset.startupState = "showing";
@@ -127,21 +156,53 @@ function createStartupOverlay(logoSrc) {
     };
 }
 
-async function playIntroSequence(overlay, reducedMotion) {
+async function playIntroSequence(overlay, holdMs) {
     overlay.setState("showing");
-    await wait(reducedMotion ? 900 : 4000);
+    await wait(holdMs);
     overlay.setState("exiting");
 }
 
+async function finalizeOverlay(overlay) {
+    await wait(EXIT_DURATION_MS);
+    document.body.classList.remove("startup-active");
+    document.documentElement.classList.remove("page-startup-pending");
+    overlay.root.remove();
+}
+
+export async function showPageTransitionSplash(options) {
+    if (!document.body) {
+        return;
+    }
+
+    var overlay = createStartupOverlay(options && options.logoSrc ? options.logoSrc : "");
+    var holdMs = options && options.minDuration ? options.minDuration : RETURN_VISIT_HOLD_MS;
+
+    document.body.classList.add("startup-active");
+    document.documentElement.classList.add("page-startup-pending");
+
+    if (options && options.appEl) {
+        options.appEl.dataset.appVisibility = "hidden";
+    }
+
+    await playIntroSequence(overlay, holdMs);
+
+    if (options && options.appEl) {
+        options.appEl.dataset.appVisibility = "visible";
+    }
+
+    await finalizeOverlay(overlay);
+}
+
 export async function runStartupSequence(options) {
-    var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var overlay = createStartupOverlay(options.logoSrc || "");
+    var holdMs = getStartupHoldDuration();
     var criticalSources = uniqueSources(options.criticalImageSources || []).map(function (src) {
         return { type: "image", src: src };
     }).concat(uniqueSources(options.criticalVideoSources || []).map(function (src) {
         return { type: "video", src: src };
     }));
 
+    markStartupSeen();
     document.body.classList.add("startup-active");
 
     if (options.appEl) {
@@ -165,8 +226,6 @@ export async function runStartupSequence(options) {
         options.appEl.dataset.appVisibility = "visible";
     }
 
-    await playIntroSequence(overlay, reducedMotion);
-    await wait(reducedMotion ? 160 : 820);
-    document.body.classList.remove("startup-active");
-    overlay.root.remove();
+    await playIntroSequence(overlay, holdMs);
+    await finalizeOverlay(overlay);
 }

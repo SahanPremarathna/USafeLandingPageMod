@@ -4,32 +4,38 @@ import heroWebmUrl from "../../images/hero_bg.webm";
 
 var problemFallback = {
     label: "WHY USAFE",
-    title: "A safer route is only the beginning.",
-    intro: "Scroll through how ordinary tools stop at directions, and how USafe expands into awareness, prevention, and response.",
+    title: "Safety Should Be Predictive. Not Reactive.",
+    intro: "Most apps guide you. USafe protects you. Before, during, and after your journey.",
     stages: [
         {
-            title: "Most apps help you move.",
-            text: "Directions, traffic, and arrival time - but little awareness of personal safety.",
-            tone: "basic",
-            kicker: "Stage 1"
+            kicker: "Stage 1",
+            label: "Awareness",
+            title: "USafe detects risk before it becomes your problem.",
+            text: "Live route context, anomaly signals, and neighborhood patterns surface early so users move with clarity instead of guesswork.",
+            tone: "awareness",
+            chips: ["Live risk signals", "Radar scan", "Context-aware alerts"],
+            hudLabel: "Live Safety Layer",
+            hudValue: "Awareness Engine"
         },
         {
-            title: "The risk is left to you.",
-            text: "Traditional tools stop at directions and leave critical safety decisions entirely to the user.",
-            tone: "risk",
-            kicker: "Stage 2"
+            kicker: "Stage 2",
+            label: "Prevention",
+            title: "USafe steers people away from danger, not toward it.",
+            text: "Safer route intelligence weighs risk, hotspots, and route changes in real time so the best path is the one that protects you.",
+            tone: "prevention",
+            chips: ["Safer route logic", "Heatmap prediction", "Decision support"],
+            hudLabel: "Predictive Routing",
+            hudValue: "Prevention Engine"
         },
         {
-            title: "USafe sees more than the route.",
-            text: "USafe detects live risk, surfaces safer alternatives, and helps users move with more awareness.",
-            tone: "aware",
-            kicker: "Stage 3"
-        },
-        {
-            title: "Protection, awareness, and response in one system.",
-            text: "USafe combines real-time safety intelligence, reliable SOS, silent emergency help, and guardian monitoring into one proactive safety platform.",
-            tone: "protect",
-            kicker: "Stage 4"
+            kicker: "Stage 3",
+            label: "Response",
+            title: "When something changes, help is already in motion.",
+            text: "Silent escalation, SOS triggers, and guardian coordination turn one moment of risk into an immediate support network.",
+            tone: "response",
+            chips: ["SOS pulse", "Silent emergency help", "Guardian sync"],
+            hudLabel: "Emergency Network",
+            hudValue: "Response Engine"
         }
     ]
 };
@@ -40,7 +46,7 @@ function getProblemContent(content) {
         label: incoming.label || problemFallback.label,
         title: incoming.title || problemFallback.title,
         intro: incoming.intro || problemFallback.intro,
-        stages: Array.isArray(incoming.stages) && incoming.stages.length === 4 ? incoming.stages : problemFallback.stages
+        stages: Array.isArray(incoming.stages) && incoming.stages.length > 0 ? incoming.stages : problemFallback.stages
     };
 }
 
@@ -50,9 +56,9 @@ function renderNavLinks(links) {
     }).join("");
 }
 
-function renderProblemDots(stages) {
-    return stages.map(function (stage, index) {
-        return '<button class="problem-dot" type="button" data-problem-dot data-stage-target="' + String(index) + '" aria-label="Go to Why USafe stage ' + String(index + 1) + '"></button>';
+function renderProblemChips(chips) {
+    return (chips || []).map(function (chip) {
+        return '<span class="problem-chip">' + chip + '</span>';
     }).join("");
 }
 
@@ -60,27 +66,37 @@ function renderProblemStages(stages) {
     return stages.map(function (stage, index) {
         return [
             '<article class="problem-stage problem-stage-', stage.tone, '" data-problem-stage data-stage-index="', String(index), '">',
-            '  <div class="problem-stage-copy">',
-            '    <span class="card-kicker">', stage.kicker || ('Stage ' + String(index + 1)), '</span>',
-            '    <h3>', stage.title, '</h3>',
-            '    <p>', stage.text, '</p>',
-            '  </div>',
-            '  <div class="problem-stage-visual" aria-hidden="true">',
-            '    <div class="problem-grid-plane"></div>',
-            '    <div class="problem-glow problem-glow-a"></div>',
-            '    <div class="problem-glow problem-glow-b"></div>',
-            '    <div class="problem-route problem-route-main"></div>',
-            '    <div class="problem-route problem-route-alt"></div>',
-            '    <div class="problem-node problem-node-start"></div>',
-            '    <div class="problem-node problem-node-end"></div>',
-            '    <div class="problem-node problem-node-risk"></div>',
-            '    <div class="problem-warning"></div>',
-            '    <div class="problem-shield"></div>',
-            '    <div class="problem-guardian-signal"></div>',
-            '    <div class="problem-stage-card glass-panel">',
-            '      <span>', index < 2 ? 'Ordinary tools' : 'USafe intelligence', '</span>',
-            '      <strong>', stage.title, '</strong>',
+            '  <div class="problem-stage-shell">',
+            '    <div class="problem-stage-copy">',
+            '      <div class="problem-stage-meta">',
+            '        <span class="card-kicker">', stage.kicker || ('Stage ' + String(index + 1)), '</span>',
+            '        <span class="problem-stage-label">', stage.label || '', '</span>',
+            '      </div>',
+            '      <h3>', stage.title, '</h3>',
             '      <p>', stage.text, '</p>',
+            '      <div class="problem-chip-list">', renderProblemChips(stage.chips), '</div>',
+            '    </div>',
+            '    <div class="problem-stage-visual" aria-hidden="true">',
+            '      <div class="problem-visual-backdrop"></div>',
+            '      <div class="problem-grid-plane"></div>',
+            '      <div class="problem-scan problem-scan-a"></div>',
+            '      <div class="problem-scan problem-scan-b"></div>',
+            '      <div class="problem-route problem-route-main"></div>',
+            '      <div class="problem-route problem-route-alt"></div>',
+            '      <div class="problem-node problem-node-a"></div>',
+            '      <div class="problem-node problem-node-b"></div>',
+            '      <div class="problem-node problem-node-c"></div>',
+            '      <div class="problem-hotspot problem-hotspot-a"></div>',
+            '      <div class="problem-hotspot problem-hotspot-b"></div>',
+            '      <div class="problem-orbit problem-orbit-a"></div>',
+            '      <div class="problem-orbit problem-orbit-b"></div>',
+            '      <div class="problem-alert-wave"></div>',
+            '      <div class="problem-guardian-link"></div>',
+            '      <div class="problem-status-beam"></div>',
+            '      <div class="problem-scene-hud glass-panel">',
+            '        <span>', stage.hudLabel || 'Safety Layer', '</span>',
+            '        <strong>', stage.hudValue || 'USafe Engine', '</strong>',
+            '      </div>',
             '    </div>',
             '  </div>',
             '</article>'
@@ -95,25 +111,9 @@ function renderFeatures(features) {
             '  <div class="feature-icon"><i class="', feature.icon, '" aria-hidden="true"></i></div>',
             '  <h3>', feature.title, '</h3>',
             '  <p>', feature.description, '</p>',
+            feature.href ? '<a class="button button-secondary feature-card-action" href="' + feature.href + '">Learn More</a>' : '',
             '</article>'
         ].join("");
-    }).join("");
-}
-
-function renderGuardianPanels(panels) {
-    return panels.map(function (panel) {
-        return [
-            '<article class="guardian-panel glass-panel interactive-card" data-reveal>',
-            '  <h3>', panel.title, '</h3>',
-            '  <p>', panel.text, '</p>',
-            '</article>'
-        ].join("");
-    }).join("");
-}
-
-function renderList(items) {
-    return items.map(function (item) {
-        return '<li>' + item + '</li>';
     }).join("");
 }
 
@@ -213,22 +213,14 @@ export function renderLanding(root, content) {
         '        </div>',
         '      </div>',
         '    </section>',
-        '    <section class="content-section story-section" id="problem" data-section-media-key="problem">',
-        '      <div class="problem-ambient problem-ambient-a" aria-hidden="true"></div>',
-        '      <div class="problem-ambient problem-ambient-b" aria-hidden="true"></div>',
-        '      <div class="problem-story-shell">',
+        '    <section class="content-section story-section" id="problem" data-section-media-key="problem">',        '      <div class="problem-story-shell">',
         '        <div class="problem-story-intro">',
         '          <span class="eyebrow">', problem.label, '</span>',
         '          <h2>', problem.title, '</h2>',
         '          <p>', problem.intro, '</p>',
         '        </div>',
-        '        <div class="problem-pin-wrap">',
-        '          <div class="problem-track" data-problem-track>',
+        '        <div class="problem-stage-stack">',
         renderProblemStages(problem.stages),
-        '          </div>',
-        '          <div class="problem-dots" aria-label="Why USafe story pagination">',
-        renderProblemDots(problem.stages),
-        '          </div>',
         '        </div>',
         '      </div>',
         '    </section>',
@@ -238,90 +230,8 @@ export function renderLanding(root, content) {
         '        <h2>', content.howItWorks.title, '</h2>',
         '        <p>', content.howItWorks.intro, '</p>',
         '      </div>',
-        '      <div class="container hero-confidence-wrap" data-reveal>',
-        '        <div class="dashboard-panel glass-panel hero-confidence-panel" id="guardian-console-anchor">',
-        '          <div class="dashboard-topline"><span>USafe City Intelligence</span><span>Live</span></div>',
-        '          <div class="dashboard-score"><strong>82</strong><span>route confidence</span></div>',
-        '          <div class="dashboard-route"><span>Campus to home</span><span>Safer path selected</span></div>',
-        '          <div class="dashboard-progress"><span></span></div>',
-        '        </div>',
-        '      </div>',
         '      <div class="container feature-grid">',
         renderFeatures(content.howItWorks.features),
-        '      </div>',
-        '    </section>',
-        '    <section class="content-section story-section guardian-section" id="guardian" data-section-media-key="guardian">',
-        '      <div class="container split-layout">',
-        '        <div class="split-copy" data-reveal>',
-        '          <span class="eyebrow">', content.guardian.label, '</span>',
-        '          <h2>', content.guardian.title, '</h2>',
-        '          <p>', content.guardian.description, '</p>',
-        '          <ul class="signal-list">',
-        renderList(content.guardian.capabilities),
-        '          </ul>',
-        '        </div>',
-        '        <div class="guardian-visual" data-reveal>',
-        '          <div class="guardian-console glass-panel" id="guardian-console">',
-        '            <div class="guardian-console-head"><span>Guardian Dashboard</span><span>Secure Session</span></div>',
-        '            <div class="guardian-console-body">',
-        '              <div class="guardian-map-window">',
-        '                <div class="guardian-map-glow"></div>',
-        '                <div class="guardian-route"></div>',
-        '                <div class="guardian-node guardian-node-primary"></div>',
-        '                <div class="guardian-node guardian-node-secondary"></div>',
-        '              </div>',
-        '              <div class="guardian-feed">',
-        '                <div class="feed-card"><span>Checkpoint</span><strong>Reached on time</strong></div>',
-        '                <div class="feed-card"><span>Status</span><strong>Monitoring active</strong></div>',
-        '                <div class="feed-card"><span>Protocol</span><strong>Instant action ready</strong></div>',
-        '              </div>',
-        '            </div>',
-        '          </div>',
-        '          <div class="guardian-panel-grid">',
-        renderGuardianPanels(content.guardian.panels),
-        '          </div>',
-        '        </div>',
-        '      </div>',
-        '    </section>',
-        '    <section class="content-section story-section" id="intelligence" data-section-media-key="intelligence">',
-        '      <div class="container split-layout reverse-on-mobile">',
-        '        <div class="intelligence-visual glass-panel interactive-card" data-reveal>',
-        '          <div class="intelligence-core"></div>',
-        '          <div class="intelligence-ring ring-one"></div>',
-        '          <div class="intelligence-ring ring-two"></div>',
-        '          <div class="intelligence-ring ring-three"></div>',
-        '          <div class="intelligence-axis axis-x"></div>',
-        '          <div class="intelligence-axis axis-y"></div>',
-        '          <div class="intelligence-dot dot-a"></div>',
-        '          <div class="intelligence-dot dot-b"></div>',
-        '          <div class="intelligence-dot dot-c"></div>',
-        '        </div>',
-        '        <div class="split-copy" data-reveal>',
-        '          <span class="eyebrow">', content.intelligence.label, '</span>',
-        '          <h2>', content.intelligence.title, '</h2>',
-        '          <p>', content.intelligence.description, '</p>',
-        '          <ul class="signal-list">',
-        renderList(content.intelligence.bullets),
-        '          </ul>',
-        '        </div>',
-        '      </div>',
-        '    </section>',
-        '    <section class="content-section story-section" id="community" data-section-media-key="community">',
-        '      <div class="container split-layout">',
-        '        <div class="community-visual glass-panel interactive-card" data-reveal>',
-        '          <div class="community-grid"></div>',
-        '          <div class="community-report report-a"><span>Street lighting issue</span></div>',
-        '          <div class="community-report report-b"><span>Unusual crowd activity</span></div>',
-        '          <div class="community-report report-c"><span>Safer crossing available</span></div>',
-        '        </div>',
-        '        <div class="split-copy" data-reveal>',
-        '          <span class="eyebrow">', content.community.label, '</span>',
-        '          <h2>', content.community.title, '</h2>',
-        '          <p>', content.community.description, '</p>',
-        '          <ul class="signal-list">',
-        renderList(content.community.bullets),
-        '          </ul>',
-        '        </div>',
         '      </div>',
         '    </section>',
         '    <section class="content-section vision-section story-section" id="vision" data-section-media-key="vision">',
@@ -370,6 +280,12 @@ export function renderLanding(root, content) {
         '</div>'
     ].join("");
 }
+
+
+
+
+
+
 
 
 

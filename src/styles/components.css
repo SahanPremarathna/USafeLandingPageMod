@@ -103,8 +103,23 @@
 }
 
 .interactive-card {
-    transform: perspective(1200px) rotateX(var(--card-rotate-x, 0deg)) rotateY(var(--card-rotate-y, 0deg));
-    transition: transform 0.24s ease;
+    position: relative;
+    z-index: 0;
+    transform: perspective(1200px) translate3d(0, var(--card-lift, 0px), 0) scale(var(--card-scale, 1)) rotateX(var(--card-rotate-x, 0deg)) rotateY(var(--card-rotate-y, 0deg)) rotateZ(var(--card-roll, 0deg));
+    transform-origin: center center;
+    transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.22, 1), box-shadow 0.32s ease, border-color 0.28s ease, filter 0.28s ease;
+    will-change: transform;
+}
+
+.interactive-card:hover,
+.interactive-card:focus-within {
+    --card-lift: -32px;
+    --card-scale: 1.095;
+    --card-roll: -1.1deg;
+    z-index: 8;
+    box-shadow: 0 58px 124px rgba(2, 8, 20, 0.64), 0 26px 58px rgba(17, 148, 255, 0.24);
+    border-color: rgba(142, 232, 255, 0.42);
+    filter: saturate(1.08);
 }
 
 .interactive-card::before {
@@ -198,4 +213,8 @@
         flex-direction: column;
     }
 }
+
+
+
+
 

@@ -1,0 +1,120 @@
+.team-gallery-photo {
+    animation: teamGalleryFloat 9s ease-in-out infinite;
+}
+
+.team-gallery-photo-2 {
+    animation-duration: 10.5s;
+    animation-delay: -1.4s;
+}
+
+.team-gallery-photo-3 {
+    animation-duration: 11.2s;
+    animation-delay: -2.8s;
+}
+
+.team-gallery-photo-4 {
+    animation-duration: 9.8s;
+    animation-delay: -4.2s;
+}
+
+@keyframes teamGalleryFloat {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(0, -10px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+[data-team-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 34px, 0);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-team-reveal].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.team-gallery-photo,
+.person-card,
+.team-narrative-panel,
+.narrative-glow,
+.hero-glow-a,
+.hero-glow-b {
+    will-change: transform, opacity;
+}
+
+.hero-glow-a {
+    animation: teamGlowA 14s ease-in-out infinite alternate;
+}
+
+.hero-glow-b {
+    animation: teamGlowB 18s ease-in-out infinite alternate;
+}
+
+.narrative-glow-a {
+    animation: narrativeGlowA 16s ease-in-out infinite alternate;
+}
+
+.narrative-glow-b {
+    animation: narrativeGlowB 20s ease-in-out infinite alternate;
+}
+
+@keyframes teamGlowA {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(24px, -18px, 0) scale(1.08);
+    }
+}
+
+@keyframes teamGlowB {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(-20px, 16px, 0) scale(1.04);
+    }
+}
+
+@keyframes narrativeGlowA {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(18px, -14px, 0) scale(1.06);
+    }
+}
+
+@keyframes narrativeGlowB {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(-16px, 12px, 0) scale(1.05);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-team-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .team-gallery-photo,
+.person-card,
+    .team-narrative-panel,
+    .narrative-glow,
+    .hero-glow-a,
+    .hero-glow-b {
+        transition: none !important;
+        animation: none !important;
+    }
+}

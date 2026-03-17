@@ -17,7 +17,7 @@ export function initMobileShowcase() {
     var dragCurrentPitch = 0;
     var drift = 0;
     var rafId = 0;
-    var currentScale = 1.006;
+    var currentScale = 1.014;
     var isHovering = false;
     var isDragging = false;
     var activePointerId = null;
@@ -53,15 +53,15 @@ export function initMobileShowcase() {
 
     function applyTransform() {
         var baseOffsetY = getBaseOffsetY();
-        var ambientYaw = Math.sin(drift * 0.78) * 0.9;
-        var ambientPitch = Math.sin(drift) * 1.4;
-        var driftOffsetY = Math.sin(drift * 0.82) * -6;
+        var ambientYaw = Math.sin(drift * 0.74) * 1.55;
+        var ambientPitch = Math.sin(drift * 1.04) * 2.3;
+        var driftOffsetY = Math.sin(drift * 0.86) * -12.5;
         var rotateY = (hoverCurrentX * 6.5) + dragCurrentYaw + ambientYaw;
         var rotateX = (hoverCurrentY * -5.2) + dragCurrentPitch + ambientPitch;
         var translateY = baseOffsetY + driftOffsetY;
-        var targetScale = reducedMotion ? 1 : (isDragging ? 1.062 : isHovering ? 1.078 : 1.006);
-        var glowStrength = reducedMotion ? 0.68 : (isDragging ? 1.18 : isHovering ? 1.02 : 0.88);
-        var shadowScale = reducedMotion ? 1 : (isDragging ? 1.16 : isHovering ? 1.08 : 1);
+        var targetScale = reducedMotion ? 1 : (isDragging ? 1.07 : isHovering ? 1.086 : 1.014);
+        var glowStrength = reducedMotion ? 0.68 : (isDragging ? 1.22 : isHovering ? 1.08 : 0.96);
+        var shadowScale = reducedMotion ? 1 : (isDragging ? 1.2 : isHovering ? 1.12 : 1.06);
         var lightX = 50 + (rotateY * 1.7);
         var lightY = 18 - (rotateX * 1.4);
 
@@ -92,7 +92,7 @@ export function initMobileShowcase() {
 
         dragCurrentYaw += (dragTargetYaw - dragCurrentYaw) * (isDragging ? 0.26 : 0.08);
         dragCurrentPitch += (dragTargetPitch - dragCurrentPitch) * (isDragging ? 0.26 : 0.08);
-        drift += 0.018;
+        drift += 0.022;
         applyTransform();
         rafId = window.requestAnimationFrame(animate);
     }
@@ -203,3 +203,4 @@ export function initMobileShowcase() {
         }
     };
 }
+
