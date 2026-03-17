@@ -4,7 +4,7 @@
     <script>document.documentElement.classList.add("page-startup-pending");</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="How USafe works: a layered safety system combining predictive route intelligence, guardian support, and community-powered context.">
+    <meta name="description" content="How USafe works: a cinematic walkthrough of the layered safety system behind proactive navigation, guardian support, and community-powered awareness.">
     <title>How USafe Works | Safety-First Navigation</title>
 
     <link rel="icon" sizes="192x192" href="images/final USafe logo.jpg">
@@ -14,10 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/shared/pageLoader.css">
     <link rel="stylesheet" href="css/shared/siteFooter.css">
-    <link rel="stylesheet" href="css/pages/how-it-works.css">
+    <link rel="stylesheet" href="styles/how-it-works.css">
+    <link rel="stylesheet" href="styles/how-it-works-animations.css">
 </head>
 <body data-startup-logo="images/usafelogo.webp" data-page="how-it-works">
     <nav class="site-nav">
@@ -41,147 +41,11 @@
         </div>
     </nav>
 
-    <main class="how-page">
-        <section class="hero-block reveal">
-            <div class="hero-backdrop" aria-hidden="true">
-                <div class="hero-grid"></div>
-                <div class="hero-glow hero-glow-a"></div>
-                <div class="hero-glow hero-glow-b"></div>
-            </div>
-            <div class="page-container hero-shell">
-                <div class="hero-copy">
-                    <span class="section-kicker">How USafe Works</span>
-                    <h1>A layered safety system that feels immediate, readable, and actionable.</h1>
-                    <p>Each core capability is designed to work alone and together, giving users a complete safety stack instead of a single panic feature.</p>
-                    <div class="hero-actions reveal" data-reveal-delay="120ms">
-                        <a class="button button-primary" href="index.html#problem">See Why USafe</a>
-                        <a class="button button-secondary" href="contact.html">Request Early Access</a>
-                    </div>
-                </div>
-                <div class="hero-panel reveal" data-reveal-delay="180ms">
-                    <div class="hero-panel-shell">
-                        <div class="hero-panel-head">
-                            <span>USafe Safety Stack</span>
-                            <strong>Live System</strong>
-                        </div>
-                        <div class="hero-score-row">
-                            <div>
-                                <small>Route confidence</small>
-                                <strong>82</strong>
-                            </div>
-                            <div class="hero-score-pill">Campus to home</div>
-                        </div>
-                        <div class="hero-panel-grid">
-                            <article><span>Awareness</span><strong>Live risk signals</strong></article>
-                            <article><span>Prevention</span><strong>Safer path selected</strong></article>
-                            <article><span>Response</span><strong>Guardian support ready</strong></article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="feature-panel-section reveal">
-            <div class="page-container">
-                <div class="feature-panel reveal">
-                    <div class="feature-panel-copy">
-                        <span class="section-kicker">Core Capabilities</span>
-                        <h2>The main feature panel behind the USafe experience.</h2>
-                        <p>These capabilities are designed to interlock. Each one can help on its own, but together they turn navigation into a proactive safety product.</p>
-                        <p class="feature-note">Each feature will also have its own dedicated sub-page.</p>
-                    </div>
-                    <div class="feature-grid">
-                        <article class="feature-card reveal pop-card" id="feature-real-time-safety-score"><div class="feature-icon"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i></div><h3>Real-Time Safety Score</h3><p>Continuous route scoring turns complex city signals into a simple confidence readout the user can understand at a glance.</p></article>
-                        <article class="feature-card reveal pop-card" id="feature-risk-heatmap"><div class="feature-icon"><i class="fa-solid fa-fire" aria-hidden="true"></i></div><h3>Risk Heatmap</h3><p>Dynamic hotspots show where caution is rising, helping users understand the shape of the environment around them.</p></article>
-                        <article class="feature-card reveal pop-card" id="feature-smart-safe-navigation"><div class="feature-icon"><i class="fa-solid fa-route" aria-hidden="true"></i></div><h3>Smart Safe Navigation</h3><p>USafe suggests safer route options, not just faster ones, balancing movement, awareness, and risk reduction.</p></article>
-                        <article class="feature-card reveal pop-card" id="feature-emergency-sos"><div class="feature-icon"><i class="fa-solid fa-bell" aria-hidden="true"></i></div><h3>Emergency SOS</h3><p>One action can trigger alerts, location sharing, and coordinated support when speed matters most.</p></article>
-                        <article class="feature-card reveal pop-card" id="feature-silent-emergency-call"><div class="feature-icon"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i></div><h3>Silent Emergency Call</h3><p>When speaking is unsafe, discreet escalation tools preserve the chance to act without drawing attention.</p></article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="detail-section reveal">
-            <div class="page-container detail-shell">
-                <div class="detail-copy reveal">
-                    <span class="section-kicker">SafePath Guardian</span>
-                    <h2>Guardian mode turns trusted people into a coordinated safety network.</h2>
-                    <p>SafePath Guardian gives selected contacts a secure browser-based dashboard with live journey visibility, checkpoint progress, and action-ready emergency status.</p>
-                    <ul class="detail-list">
-                        <li>Trusted contacts join through a secure live link</li>
-                        <li>Browser dashboard shows route, status, and last known context</li>
-                        <li>Checkpoint updates confirm progress without friction</li>
-                        <li>Instant action protocol activates when the journey goes off track</li>
-                    </ul>
-                </div>
-                <div class="detail-visual guardian-board reveal">
-                    <div class="detail-surface guardian-console">
-                        <div class="detail-surface-head"><span>Guardian Dashboard</span><span>Secure Session</span></div>
-                        <div class="guardian-console-grid">
-                            <article><span>Checkpoint</span><strong>Reached on time</strong></article>
-                            <article><span>Status</span><strong>Monitoring active</strong></article>
-                            <article><span>Protocol</span><strong>Instant action ready</strong></article>
-                        </div>
-                    </div>
-                    <div class="detail-mini-grid">
-                        <article class="detail-mini-card"><h3>Secure Link</h3><p>Guardian access opens in seconds without app installation friction.</p></article>
-                        <article class="detail-mini-card"><h3>Live Monitoring</h3><p>Contacts see movement, delays, and escalations from one focused dashboard.</p></article>
-                        <article class="detail-mini-card"><h3>Checkpoint Updates</h3><p>Routine check-ins reduce uncertainty during higher-risk travel windows.</p></article>
-                        <article class="detail-mini-card"><h3>Action Protocol</h3><p>When the system detects a serious break in pattern, support can move immediately.</p></article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="detail-section reveal">
-            <div class="page-container detail-shell detail-shell-reverse">
-                <div class="detail-visual intelligence-board reveal">
-                    <div class="detail-surface signal-surface">
-                        <div class="signal-grid"></div>
-                        <span class="signal-tag signal-a">Street lighting issue</span>
-                        <span class="signal-tag signal-b">Unusual crowd activity</span>
-                        <span class="signal-tag signal-c">Safer crossing available</span>
-                    </div>
-                </div>
-                <div class="detail-copy reveal">
-                    <span class="section-kicker">AI Safety Intelligence</span>
-                    <h2>Predictive safety intelligence built to notice patterns people miss.</h2>
-                    <p>USafe combines route context, user movement, and evolving local signals to anticipate risk earlier and support calmer decisions under pressure.</p>
-                    <ul class="detail-list">
-                        <li>Learns from route changes, environmental context, and anomaly signals</li>
-                        <li>Turns raw safety data into proactive guidance instead of static information</li>
-                        <li>Supports future-ready city safety workflows with explainable UI cues</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="detail-section reveal">
-            <div class="page-container detail-shell">
-                <div class="detail-copy reveal">
-                    <span class="section-kicker">Community Reporting</span>
-                    <h2>A safety network gets stronger when people can warn each other clearly.</h2>
-                    <p>Community-powered reports help surface real local context fast, while the interface keeps signal quality readable instead of chaotic.</p>
-                    <ul class="detail-list">
-                        <li>Citizens can flag hazards, suspicious activity, or blocked paths</li>
-                        <li>Reports strengthen local awareness for the next person entering the area</li>
-                        <li>The product balances human reports with system intelligence for better clarity</li>
-                    </ul>
-                </div>
-                <div class="detail-visual community-board reveal">
-                    <div class="detail-surface community-surface">
-                        <article class="community-card community-card-a"><span>Street lighting issue</span></article>
-                        <article class="community-card community-card-b"><span>Unusual crowd activity</span></article>
-                        <article class="community-card community-card-c"><span>Safer crossing available</span></article>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+    <main id="how-it-works-root" class="how-page"></main>
 
     <script src="js/shared/pageLoader.js"></script>
     <script src="js/shared/navigation.js"></script>
-    <script src="js/shared/reveal.js"></script>
+    <script type="module" src="scripts/how-it-works-page.js"></script>
 
     <footer class="site-footer">
         <div class="nav-container footer-layout">
@@ -233,7 +97,6 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>
 

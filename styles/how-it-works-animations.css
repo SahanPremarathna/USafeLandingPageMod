@@ -1,0 +1,126 @@
+[data-how-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 34px, 0) scale(0.985);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: blur(6px);
+}
+
+[data-how-reveal].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+}
+
+.hero-panel,
+.capability-card,
+.scene-visual-shell,
+.guardian-journey-scene,
+.signal-scene,
+.community-scene,
+.conclusion-shell {
+    will-change: transform, opacity;
+}
+
+.hero-glow-a {
+    animation: heroGlowFloatA 15s ease-in-out infinite alternate;
+}
+
+.hero-glow-b {
+    animation: heroGlowFloatB 18s ease-in-out infinite alternate;
+}
+
+.hero-panel-sweep {
+    animation: heroSweep 8s ease-in-out infinite;
+}
+
+.hero-stack-card:nth-child(1) {
+    animation: stackPulse 6s ease-in-out infinite;
+}
+
+.hero-stack-card:nth-child(2) {
+    animation: stackPulse 6s ease-in-out infinite 0.6s;
+}
+
+.hero-stack-card:nth-child(3) {
+    animation: stackPulse 6s ease-in-out infinite 1.2s;
+}
+
+.story-section.is-active .scene-ring,
+.story-section.is-active .guardian-checkpoint-dot,
+.story-section.is-active .guardian-contact-ping,
+.story-section.is-active .system-node {
+    animation: nodePulse 4.8s ease-in-out infinite;
+}
+
+.story-section.is-active .route-branch,
+.story-section.is-active .signal-link,
+.story-section.is-active .community-line,
+.story-section.is-active .system-line,
+.story-section.is-active .guardian-route-line {
+    animation: signalTravel 5.2s ease-in-out infinite;
+}
+
+.story-section.is-active .route-hotspot,
+.story-section.is-active .community-ripple,
+.story-section.is-active .response-wave {
+    animation: softRipple 5s ease-in-out infinite;
+}
+
+.story-section.is-active .scene-float-a,
+.story-section.is-active .scene-float-b {
+    animation: floatCard 9s ease-in-out infinite alternate;
+}
+
+.story-section.is-active .signal-tag,
+.story-section.is-active .community-tag {
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes heroGlowFloatA {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(24px, -18px, 0) scale(1.06); }
+}
+
+@keyframes heroGlowFloatB {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(-22px, 12px, 0) scale(1.04); }
+}
+
+@keyframes heroSweep {
+    0%, 100% { transform: rotate(18deg) translateX(-8%); opacity: 0.2; }
+    50% { transform: rotate(18deg) translateX(52%); opacity: 0.75; }
+}
+
+@keyframes stackPulse {
+    0%, 100% { transform: translateY(0); border-color: rgba(159, 223, 255, 0.08); }
+    50% { transform: translateY(-4px); border-color: rgba(159, 223, 255, 0.2); }
+}
+
+@keyframes nodePulse {
+    0%, 100% { transform: scale(0.94); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes signalTravel {
+    0%, 100% { opacity: 0.32; filter: drop-shadow(0 0 0 rgba(53, 213, 255, 0)); }
+    50% { opacity: 1; filter: drop-shadow(0 0 12px rgba(53, 213, 255, 0.4)); }
+}
+
+@keyframes softRipple {
+    0%, 100% { transform: scale(0.96); opacity: 0.26; }
+    50% { transform: scale(1.08); opacity: 0.72; }
+}
+
+@keyframes floatCard {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(0, -10px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-how-reveal] {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
+

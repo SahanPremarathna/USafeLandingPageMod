@@ -236,10 +236,17 @@ export function renderLanding(root, content) {
         '    </section>',
         '    <section class="content-section vision-section story-section" id="vision" data-section-media-key="vision">',
         '      <div class="container">',
-        '        <div class="vision-panel glass-panel" data-reveal>',
-        '          <span class="eyebrow">', content.vision.label, '</span>',
-        '          <h2>', content.vision.title, '</h2>',
-        '          <p>', content.vision.description, '</p>',
+        '        <div class="vision-panel" data-reveal>',
+        '          <div class="vision-ambient" aria-hidden="true">',
+        '            <div class="vision-symbol">U</div>',
+        '            <div class="vision-divider"></div>',
+        '          </div>',
+        '          <div class="vision-copy">',
+        '            <span class="eyebrow">', content.vision.label, '</span>',
+        '            <h2>', content.vision.title, '</h2>',
+        '            <div class="vision-copy-divider" aria-hidden="true"></div>',
+        '            <p>', content.vision.description, '</p>',
+        '          </div>',
         '        </div>',
         '      </div>',
         '    </section>',
@@ -280,6 +287,7 @@ export function renderLanding(root, content) {
         '</div>'
     ].join("");
 }
+
 
 
 

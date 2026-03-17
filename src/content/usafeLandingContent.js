@@ -114,7 +114,7 @@ const usafeLandingContent = {
     vision: {
         label: "Vision",
         title: "We believe safety should move with you, not follow behind you.",
-        description: "USafe envisions a world where every journey is guided by intelligence, protected in real time, and experienced with confidence and not uncertainty."
+        description: "Our vision is a world where safety is proactive, intelligence is calm, and every journey feels more in your control."
     },
     cta: {
         title: "Try the safety-first route experience people will actually trust.",
@@ -164,3 +164,6 @@ const usafeLandingContent = {
 };
 
 export default usafeLandingContent;
+
+
+

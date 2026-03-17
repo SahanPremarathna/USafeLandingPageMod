@@ -20,8 +20,140 @@ export function initWhyUsafeSection() {
         var nodes = gsap.utils.toArray(".problem-node, .problem-hotspot, .problem-scan, .problem-orbit", stage);
         var lines = gsap.utils.toArray(".problem-route, .problem-status-beam, .problem-guardian-link, .problem-alert-wave", stage);
         var hud = stage.querySelector(".problem-scene-hud");
-        var startX = reducedMotion ? 0 : direction;
-        var startY = reducedMotion ? 0 : 24;
+
+        function setInitialState(multiplier) {
+            if (reducedMotion) {
+                return;
+            }
+
+            gsap.set(stage, { autoAlpha: 0, x: direction * multiplier, y: 24 });
+
+            if (copy) {
+                gsap.set(copy, { autoAlpha: 0, x: direction * 0.5 * multiplier });
+            }
+
+            if (visual) {
+                gsap.set(visual, { autoAlpha: 0, x: -direction * 0.45 * multiplier, y: 18 });
+            }
+
+            if (chips.length > 0) {
+                gsap.set(chips, { autoAlpha: 0, y: 12 });
+            }
+
+            if (nodes.length > 0) {
+                gsap.set(nodes, { autoAlpha: 0.18, scale: 0.84 });
+            }
+
+            if (lines.length > 0) {
+                gsap.set(lines, { autoAlpha: 0.1, scaleX: 0.78 });
+            }
+
+            if (hud) {
+                gsap.set(hud, { autoAlpha: 0, y: 18 });
+            }
+        }
+
+        function playReveal(multiplier) {
+            if (reducedMotion) {
+                gsap.set(stage, { autoAlpha: 1, x: 0, y: 0 });
+                if (copy) {
+                    gsap.set(copy, { autoAlpha: 1, x: 0 });
+                }
+                if (visual) {
+                    gsap.set(visual, { autoAlpha: 1, x: 0, y: 0 });
+                }
+                if (chips.length > 0) {
+                    gsap.set(chips, { autoAlpha: 1, y: 0 });
+                }
+                if (nodes.length > 0) {
+                    gsap.set(nodes, { autoAlpha: 1, scale: 1 });
+                }
+                if (lines.length > 0) {
+                    gsap.set(lines, { autoAlpha: 1, scaleX: 1 });
+                }
+                if (hud) {
+                    gsap.set(hud, { autoAlpha: 1, y: 0 });
+                }
+                return;
+            }
+
+            setInitialState(multiplier);
+
+            gsap.to(stage, {
+                autoAlpha: 1,
+                x: 0,
+                y: 0,
+                duration: 0.95,
+                ease: "power3.out",
+                overwrite: "auto"
+            });
+
+            if (copy) {
+                gsap.to(copy, {
+                    autoAlpha: 1,
+                    x: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    overwrite: "auto"
+                });
+            }
+
+            if (visual) {
+                gsap.to(visual, {
+                    autoAlpha: 1,
+                    x: 0,
+                    y: 0,
+                    duration: 0.9,
+                    ease: "power2.out",
+                    overwrite: "auto"
+                });
+            }
+
+            if (chips.length > 0) {
+                gsap.to(chips, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.5,
+                    stagger: 0.05,
+                    ease: "power2.out",
+                    overwrite: "auto"
+                });
+            }
+
+            if (nodes.length > 0) {
+                gsap.to(nodes, {
+                    autoAlpha: 1,
+                    scale: 1,
+                    duration: 0.9,
+                    stagger: 0.03,
+                    ease: "power2.out",
+                    overwrite: "auto"
+                });
+            }
+
+            if (lines.length > 0) {
+                gsap.to(lines, {
+                    autoAlpha: 1,
+                    scaleX: 1,
+                    duration: 1,
+                    stagger: 0.04,
+                    ease: "power2.out",
+                    overwrite: "auto"
+                });
+            }
+
+            if (hud) {
+                gsap.to(hud, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.65,
+                    ease: "power2.out",
+                    overwrite: "auto"
+                });
+            }
+        }
+
+        setInitialState(1);
 
         ScrollTrigger.create({
             trigger: stage,
@@ -29,117 +161,19 @@ export function initWhyUsafeSection() {
             end: "bottom 32%",
             onEnter: function () {
                 stage.classList.add("is-active");
+                playReveal(1);
             },
             onEnterBack: function () {
                 stage.classList.add("is-active");
+                playReveal(-1);
             },
             onLeave: function () {
                 stage.classList.remove("is-active");
             },
             onLeaveBack: function () {
                 stage.classList.remove("is-active");
+                setInitialState(1);
             }
         });
-
-        gsap.fromTo(stage, { autoAlpha: reducedMotion ? 1 : 0, x: startX, y: startY }, {
-            autoAlpha: 1,
-            x: 0,
-            y: 0,
-            duration: reducedMotion ? 0.01 : 0.95,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: stage,
-                start: "top 82%",
-                toggleActions: "play none none reverse"
-            }
-        });
-
-        if (copy) {
-            gsap.fromTo(copy, { autoAlpha: reducedMotion ? 1 : 0, x: reducedMotion ? 0 : direction * 0.5 }, {
-                autoAlpha: 1,
-                x: 0,
-                duration: reducedMotion ? 0.01 : 0.8,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: stage,
-                    start: "top 76%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        }
-
-        if (visual) {
-            gsap.fromTo(visual, { autoAlpha: reducedMotion ? 1 : 0, x: reducedMotion ? 0 : -direction * 0.45, y: reducedMotion ? 0 : 18 }, {
-                autoAlpha: 1,
-                x: 0,
-                y: 0,
-                duration: reducedMotion ? 0.01 : 0.9,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: stage,
-                    start: "top 74%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        }
-
-        if (chips.length > 0) {
-            gsap.fromTo(chips, { autoAlpha: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : 12 }, {
-                autoAlpha: 1,
-                y: 0,
-                duration: reducedMotion ? 0.01 : 0.5,
-                stagger: reducedMotion ? 0 : 0.05,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: stage,
-                    start: "top 72%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        }
-
-        if (!reducedMotion && nodes.length > 0) {
-            gsap.fromTo(nodes, { autoAlpha: 0.18, scale: 0.84 }, {
-                autoAlpha: 1,
-                scale: 1,
-                duration: 0.9,
-                stagger: 0.03,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: stage,
-                    start: "top 72%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        }
-
-        if (!reducedMotion && lines.length > 0) {
-            gsap.fromTo(lines, { autoAlpha: 0.1, scaleX: 0.78 }, {
-                autoAlpha: 1,
-                scaleX: 1,
-                duration: 1,
-                stagger: 0.04,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: stage,
-                    start: "top 70%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        }
-
-        if (hud) {
-            gsap.fromTo(hud, { autoAlpha: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : 18 }, {
-                autoAlpha: 1,
-                y: 0,
-                duration: reducedMotion ? 0.01 : 0.65,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: stage,
-                    start: "top 70%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        }
     });
 }

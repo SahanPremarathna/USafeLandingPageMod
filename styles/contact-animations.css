@@ -9,12 +9,13 @@
     transform: translate3d(0, 0, 0);
 }
 
-.contact-path-card,
-.contact-signal-card,
-.contact-signal-panel,
-.contact-direct-card,
 .contact-form-panel,
-.cta-visual-shell {
+.contact-direct-card,
+.contact-path-option,
+.support-strip-chips li,
+.cta-visual-shell,
+.contact-signal-visual,
+.contact-panel-body {
     will-change: transform, opacity;
 }
 
@@ -24,6 +25,32 @@
 
 .hero-glow-b {
     animation: contactGlowB 18s ease-in-out infinite alternate;
+}
+
+.orbit-a {
+    animation: contactOrbitA 14s ease-in-out infinite alternate;
+}
+
+.orbit-b {
+    animation: contactOrbitB 11s ease-in-out infinite alternate;
+}
+
+.route-a,
+.route-b,
+.route-c,
+.cta-route-a,
+.cta-route-b,
+.cta-route-c {
+    animation: contactRoutePulse 6.8s ease-in-out infinite;
+}
+
+.node-a,
+.node-b,
+.node-c,
+.cta-node-a,
+.cta-node-b,
+.cta-node-c {
+    animation: contactNodePulse 4.8s ease-in-out infinite;
 }
 
 .cta-glow {
@@ -48,6 +75,48 @@
     }
 }
 
+@keyframes contactOrbitA {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(12px, -8px, 0) scale(1.03);
+    }
+}
+
+@keyframes contactOrbitB {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(-10px, 10px, 0) scale(1.04);
+    }
+}
+
+@keyframes contactRoutePulse {
+    0%,
+    100% {
+        opacity: 0.35;
+        filter: drop-shadow(0 0 0 rgba(53, 213, 255, 0));
+    }
+    50% {
+        opacity: 0.95;
+        filter: drop-shadow(0 0 10px rgba(53, 213, 255, 0.4));
+    }
+}
+
+@keyframes contactNodePulse {
+    0%,
+    100% {
+        transform: scale(0.92);
+        opacity: 0.72;
+    }
+    50% {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+}
+
 @keyframes contactPulse {
     from {
         opacity: 0.5;
@@ -68,13 +137,27 @@
 
     .hero-glow-a,
     .hero-glow-b,
+    .orbit-a,
+    .orbit-b,
+    .route-a,
+    .route-b,
+    .route-c,
+    .node-a,
+    .node-b,
+    .node-c,
+    .cta-route-a,
+    .cta-route-b,
+    .cta-route-c,
+    .cta-node-a,
+    .cta-node-b,
+    .cta-node-c,
     .cta-glow,
-    .contact-path-card,
-    .contact-signal-card,
-    .contact-signal-panel,
-    .contact-direct-card,
     .contact-form-panel,
-    .cta-visual-shell,
+    .contact-direct-card,
+    .contact-path-option,
+    .support-strip-chips li,
+    .contact-signal-visual,
+    .contact-panel-body,
     .field input,
     .field textarea {
         transition: none !important;

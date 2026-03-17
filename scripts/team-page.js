@@ -1,4 +1,5 @@
 import { initTeamAnimations } from "./team-animations.js";
+import { initSectionBackgroundVideos } from "./section-background-videos.js";
 
 const teamGalleryImages = [
     "images/team-gallery/team-0.webp",
@@ -6,6 +7,12 @@ const teamGalleryImages = [
     "images/team-gallery/team-3.webp",
     "images/team-gallery/team-2.webp"
 ];
+
+const teamSectionMedia = {
+    hero: "images/bg_vids/vecteezy_cityscape-timelapse-at-night_2019801.mp4",
+    people: "images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.mp4",
+    narrative: "images/bg_vids/vecteezy_timelapse-hong-kong-city_3362813.mp4"
+};
 
 const teamPageContent = {
     hero: {
@@ -148,7 +155,7 @@ function renderPeopleSection(people) {
     var rest = people.members.slice(1);
 
     return [
-        '<section class="team-section team-people-section">',
+        '<section class="team-section team-people-section" data-section-media-key="people">',
         '  <div class="page-container">',
         '    <div class="section-heading" data-team-reveal>',
         '      <span class="section-kicker">' + people.kicker + '</span>',
@@ -166,7 +173,7 @@ function renderPeopleSection(people) {
 
 function renderUnifiedSection(unified) {
     return [
-        '<section class="team-section team-narrative">',
+        '<section class="team-section team-narrative" data-section-media-key="narrative">',
         '  <div class="team-section-backdrop team-section-backdrop-narrative" aria-hidden="true">',
         '    <div class="narrative-lines"></div>',
         '    <div class="narrative-glow narrative-glow-a"></div>',
@@ -195,7 +202,12 @@ function renderUnifiedSection(unified) {
 
 function renderPage(content) {
     return [
-        '<section class="team-section team-hero">',
+        '<div class="section-video-stage" aria-hidden="true">',
+'  <video class="section-video-layer is-active" data-section-video-primary autoplay muted loop playsinline preload="auto"></video>',
+'  <video class="section-video-layer" data-section-video-secondary autoplay muted loop playsinline preload="auto"></video>',
+'  <div class="section-video-overlay"></div>',
+'</div>',
+'<section class="team-section team-hero" data-section-media-key="hero">',
         '  <div class="team-section-backdrop team-section-backdrop-hero" aria-hidden="true">',
         '    <div class="hero-grid"></div>',
         '    <div class="hero-glow hero-glow-a"></div>',
@@ -273,8 +285,11 @@ function initTeamPage() {
     }
 
     root.innerHTML = renderPage(teamPageContent);
+    initSectionBackgroundVideos(teamSectionMedia, document);
     initTeamAnimations(document);
     initTeamGallery(document);
 }
 
 initTeamPage();
+
+
