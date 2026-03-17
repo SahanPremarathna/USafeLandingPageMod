@@ -3,14 +3,13 @@
     display: flex;
     align-items: stretch;
     padding: 108px 0 72px;
-    overflow: clip;
+    overflow: visible;
 }
 
 .hero-backdrop,
 .hero-video,
 .hero-noise,
-.hero-grid-overlay,
-.hero-scene-canvas {
+.hero-grid-overlay {
     position: absolute;
     inset: 0;
 }
@@ -40,17 +39,14 @@
     opacity: 0.24;
 }
 
-.hero-scene-canvas canvas {
-    width: 100%;
-    height: 100%;
-}
+
 
 .hero-shell {
     position: relative;
     z-index: 2;
     min-height: min(760px, calc(100svh - 108px));
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(520px, 0.95fr);
+    grid-template-columns: minmax(0, 60%) minmax(0, 40%);
     gap: 96px;
     align-items: center;
 }
@@ -89,18 +85,23 @@
 }
 
 .hero-description {
-    max-width: 520px;
+    max-width: 540px;
+    margin: 0 0 34px;
     font-size: 0.98rem;
+    line-height: 1.68;
 }
 
 .trust-line {
-    margin-top: 20px;
-    color: rgba(208, 223, 245, 0.74);
-    font-size: 0.92rem;
+    margin-top: 40px;
+    color: rgba(208, 223, 245, 0.58);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
 }
 
 .hero-visual {
     perspective: 1600px;
+    overflow: visible;
 }
 
 .hero-map-stage {
@@ -125,7 +126,6 @@
 .map-depth-layer,
 .map-route,
 .node-pill,
-.dashboard-panel,
 .hero-signal {
     position: absolute;
 }
@@ -229,11 +229,118 @@
 }
 
 .dashboard-panel {
-    left: 12%;
-    right: 14%;
-    bottom: 12%;
     padding: 28px 28px 24px;
     border-radius: 28px;
+}
+
+.hero-confidence-wrap {
+    margin: 0 auto 28px;
+}
+
+.hero-confidence-panel {
+    position: relative;
+    width: min(680px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mobile-device-shell {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.mobile-device {
+    position: relative;
+    aspect-ratio: 0.48;
+    border-radius: 42px;
+    padding: 12px;
+    background: linear-gradient(155deg, rgba(235, 244, 255, 0.16), rgba(42, 66, 100, 0.28) 24%, rgba(8, 14, 26, 0.98) 78%);
+    box-shadow: 0 32px 60px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(177, 212, 255, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(18px);
+}
+
+.mobile-device::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border-radius: 34px;
+    border: 1px solid rgba(196, 226, 255, 0.1);
+    pointer-events: none;
+}
+
+.mobile-device-notch {
+    position: absolute;
+    left: 50%;
+    top: 14px;
+    width: 34%;
+    height: 28px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: rgba(6, 10, 18, 0.96);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    z-index: 3;
+}
+
+.mobile-screen-wrap {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 32px;
+    background: linear-gradient(180deg, rgba(8, 20, 34, 0.98), rgba(5, 10, 18, 1));
+}
+
+.mobile-screen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
+}
+
+.mobile-screen[data-phase="typing"],
+.mobile-screen[data-phase="holding"] {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+}
+
+.mobile-screen[data-phase="glitching"],
+.mobile-screen[data-phase="cleared"] {
+    opacity: 0.72;
+    transform: scale(0.98) translateY(6px);
+    filter: blur(3px);
+}
+
+.mobile-screen-reflection,
+.mobile-screen-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.mobile-screen-reflection {
+    background: linear-gradient(115deg, transparent 18%, rgba(255, 255, 255, 0.16) 34%, transparent 48%);
+    mix-blend-mode: screen;
+    opacity: 0.38;
+    transform: translateX(calc(var(--phone-reflection-shift, 50%) - 50%));
+    transition: transform 420ms ease, opacity 420ms ease;
+}
+
+.mobile-screen-glow {
+    background: radial-gradient(circle at 50% 14%, rgba(166, 220, 255, 0.18), transparent 38%), radial-gradient(circle at 50% 88%, rgba(73, 168, 255, 0.08), transparent 42%);
+    opacity: 0.88;
+}
+
+.mobile-device-shadow {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: -28px;
+    height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(13, 24, 42, 0.42), transparent 72%);
+    filter: blur(14px);
+    transform: translateZ(-60px);
 }
 
 .dashboard-topline,
@@ -285,17 +392,23 @@
 .comparison-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
+    gap: 14px;
 }
 
 #problem {
-    min-height: auto;
+    min-height: 100svh;
     overflow: clip;
+    display: flex;
+    align-items: stretch;
 }
 
 .problem-story-shell {
     position: relative;
     width: 100%;
+    min-height: calc(100svh - 96px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-content: start;
 }
 
 .problem-ambient {
@@ -332,7 +445,7 @@
 .problem-story-intro h2 {
     max-width: 14ch;
     margin: 0;
-    font-size: clamp(2.3rem, 4vw, 4.8rem);
+    font-size: clamp(1.9rem, 3.2vw, 3.6rem);
     line-height: 0.98;
 }
 
@@ -397,17 +510,17 @@
     min-width: 25%;
     height: 100%;
     display: grid;
-    grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
-    gap: 40px;
+    grid-template-columns: minmax(248px, 0.62fr) minmax(0, 0.96fr);
+    gap: 14px;
     align-items: center;
     width: 100%;
-    padding: 0 max(32px, calc((100vw - min(1180px, calc(100vw - 48px))) / 2));
+    padding: 0 max(96px, calc((100vw - min(1180px, calc(100vw - 48px))) / 2) + 44px);
 }
 
 .problem-stage::before {
     content: "";
     position: absolute;
-    inset: 116px 132px;
+    inset: 116px max(104px, calc((100vw - min(1180px, calc(100vw - 48px))) / 2) + 28px);
     border-radius: 36px;
     border: 1px solid rgba(122, 161, 255, 0.12);
     background:
@@ -455,8 +568,8 @@
 .problem-stage-copy {
     display: grid;
     gap: 16px;
-    max-width: 360px;
-    padding: 22px;
+    max-width: 292px;
+    padding: 20px;
     border-radius: 28px;
     border: 1px solid rgba(122, 161, 255, 0.1);
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
@@ -465,8 +578,8 @@
 
 .problem-stage-copy h3 {
     margin: 0;
-    font-size: clamp(1.65rem, 2.5vw, 2.8rem);
-    line-height: 1.08;
+    font-size: clamp(1.46rem, 2.12vw, 2.34rem);
+    line-height: 1.04;
 }
 
 .problem-stage-copy p {
@@ -478,7 +591,7 @@
 
 .problem-stage-visual {
     position: relative;
-    min-height: 460px;
+    min-height: 392px;
     border-radius: 36px;
     overflow: hidden;
     border: 1px solid rgba(122, 161, 255, 0.12);
@@ -609,10 +722,10 @@
 }
 
 .problem-stage-card {
-    left: 8%;
-    bottom: 10%;
-    width: min(300px, 40%);
-    padding: 22px;
+    left: 9%;
+    bottom: 11%;
+    width: min(224px, 34%);
+    padding: 20px;
     border-radius: 24px;
 }
 
@@ -990,7 +1103,7 @@
     }
 
     .hero-shell {
-        gap: 40px;
+        gap: 14px;
         padding-bottom: 48px;
     }
 
@@ -1040,14 +1153,14 @@
         display: grid;
         width: 100%;
         height: auto;
-        gap: 28px;
+        gap: 14px;
     }
 
     .problem-stage {
         min-width: 0;
         height: auto;
         grid-template-columns: 1fr;
-        gap: 28px;
+        gap: 14px;
         padding: 0 16px;
     }
 
@@ -1127,14 +1240,19 @@
         font-size: clamp(3rem, 14vw, 4.8rem);
     }
 
+    .hero-description {
+        margin-bottom: 30px;
+    }
+
+    .trust-line {
+        margin-top: 34px;
+    }
+
     .hero-map-stage {
         min-height: 500px;
     }
-
-    .dashboard-panel {
-        left: 7%;
-        right: 7%;
-        bottom: 7%;
+.hero-confidence-wrap {
+        margin-bottom: 24px;
     }
 
     .feature-grid {
@@ -1150,8 +1268,7 @@
     .hero-map-stage {
         min-height: 430px;
     }
-
-    .dashboard-score strong {
+.dashboard-score strong {
         font-size: 4rem;
     }
 
@@ -1172,6 +1289,21 @@
         padding: 16px 0;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -8,8 +8,10 @@ export function initSmoothScroll() {
     }
 
     var lenis = new Lenis({
-        duration: 0.82,
+        duration: 0.55,
         smoothWheel: true,
+        wheelMultiplier: 0.92,
+        touchMultiplier: 1,
         gestureOrientation: "vertical"
     });
 
@@ -23,4 +25,3 @@ export function initSmoothScroll() {
 
     return lenis;
 }
-

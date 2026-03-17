@@ -1,0 +1,16 @@
+<svg width="720" height="1440" viewBox="0 0 720 1440" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="1440" rx="72" fill="#081829"/>
+  <rect x="48" y="108" width="624" height="152" rx="34" fill="#0C2137" stroke="#1B5777"/>
+  <text x="92" y="176" fill="#9FDFFF" font-family="Arial" font-size="34" font-weight="700">Predictive Risk</text>
+  <text x="92" y="220" fill="#7F9FBE" font-family="Arial" font-size="22">Pattern forecast</text>
+  <rect x="84" y="320" width="552" height="420" rx="42" fill="#0A1D30" stroke="#183D58"/>
+  <path d="M132 648C192 574 240 602 296 538C352 474 426 484 484 430C522 394 560 378 596 392" stroke="#8EE8FF" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="296" cy="538" r="12" fill="#8EE8FF"/>
+  <circle cx="484" cy="430" r="12" fill="#8EE8FF"/>
+  <rect x="84" y="790" width="552" height="330" rx="42" fill="#0D243C" stroke="#1D4D6E"/>
+  <text x="124" y="860" fill="#9FDFFF" font-family="Arial" font-size="26" font-weight="700">Confidence Trend</text>
+  <rect x="124" y="920" width="472" height="18" rx="9" fill="#14314C"/>
+  <rect x="124" y="920" width="346" height="18" rx="9" fill="#66C5FF"/>
+  <text x="124" y="992" fill="#F4F8FC" font-family="Arial" font-size="54" font-weight="700">+24%</text>
+  <text x="124" y="1040" fill="#7F9FBE" font-family="Arial" font-size="24">forecasted shift in caution score</text>
+</svg>

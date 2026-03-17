@@ -1,0 +1,19 @@
+<svg width="720" height="1440" viewBox="0 0 720 1440" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="1440" rx="72" fill="#071423"/>
+  <rect x="48" y="108" width="624" height="152" rx="34" fill="#0D243C" stroke="#1A5D80"/>
+  <text x="92" y="176" fill="#9FDFFF" font-family="Arial" font-size="34" font-weight="700">Risk Heatmap</text>
+  <text x="92" y="220" fill="#7F9FBE" font-family="Arial" font-size="22">Early anomaly detection</text>
+  <rect x="84" y="320" width="552" height="552" rx="42" fill="#0A1D30" stroke="#183D58"/>
+  <circle cx="236" cy="544" r="120" fill="#FF6E4F" fill-opacity="0.3"/>
+  <circle cx="380" cy="626" r="168" fill="#FFB068" fill-opacity="0.26"/>
+  <circle cx="484" cy="508" r="104" fill="#35D5FF" fill-opacity="0.18"/>
+  <circle cx="236" cy="544" r="12" fill="#FFD2A6"/>
+  <circle cx="380" cy="626" r="14" fill="#FFD2A6"/>
+  <circle cx="484" cy="508" r="10" fill="#8EE8FF"/>
+  <rect x="84" y="924" width="260" height="196" rx="30" fill="#0D243C" stroke="#1D4D6E"/>
+  <text x="116" y="994" fill="#F9C28C" font-family="Arial" font-size="26" font-weight="700">Alert Level</text>
+  <text x="116" y="1042" fill="#F4F8FC" font-family="Arial" font-size="54" font-weight="700">82%</text>
+  <rect x="376" y="924" width="260" height="196" rx="30" fill="#0D243C" stroke="#1D4D6E"/>
+  <text x="408" y="994" fill="#9FDFFF" font-family="Arial" font-size="26" font-weight="700">Nearby Signal</text>
+  <text x="408" y="1042" fill="#F4F8FC" font-family="Arial" font-size="34" font-weight="700">Campus East</text>
+</svg>

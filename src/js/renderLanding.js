@@ -1,4 +1,4 @@
-import logoUrl from "../../images/final USafe logo.jpg";
+import logoUrl from "../../images/usafelogo.webp";
 import heroPosterUrl from "../../images/pre_load_hero_bg.webp";
 import heroWebmUrl from "../../images/hero_bg.webm";
 
@@ -177,12 +177,18 @@ export function renderLanding(root, content) {
         '        </video>',
         '        <div class="hero-noise"></div>',
         '        <div class="hero-grid-overlay"></div>',
-        '        <div class="hero-scene-canvas" id="hero-three-scene" aria-hidden="true"></div>',
         '      </div>',
         '      <div class="container hero-shell" data-reveal>',
         '        <div class="hero-copy">',
         '          <span class="eyebrow">', content.hero.eyebrow, '</span>',
-        '          <h1>', content.hero.title, '</h1>',
+        '          <h1 class="hero-headline">',
+        '            <span class="headline-pretext">', content.hero.titlePrefix || 'See the', '</span>',
+        '            <span class="typed-line" data-typed-line aria-live="polite" aria-atomic="true">',
+        '              <span class="typed-before" data-typed-before></span>',
+        '              <span class="typed-highlight" data-typed-highlight></span>',
+        '              <span class="typed-after" data-typed-after></span>',
+        '            </span>',
+        '          </h1>',
         '          <p class="hero-description">', content.hero.description, '</p>',
         '          <div class="hero-actions">',
         '            <a class="button button-primary" href="', content.hero.primaryCta.href, '">', content.hero.primaryCta.label, '</a>',
@@ -190,20 +196,18 @@ export function renderLanding(root, content) {
         '          </div>',
         '          <p class="trust-line">', content.hero.trustLine, '</p>',
         '        </div>',
-        '        <div class="hero-visual" id="hero-visual">',
-        '          <div class="hero-map-stage">',
-        '            <div class="hero-visual-glow"></div>',
-        '            <div class="map-depth-layer map-depth-layer-a"></div>',
-        '            <div class="map-route map-route-primary"></div>',
-        '            <div class="map-route map-route-secondary"></div>',
-        '            <div class="hero-signal hero-signal-a"></div>',
-        '            <div class="node-pill node-pill-safe node-a">Safe Zone</div>',
-        '            <div class="node-pill node-pill-danger node-c">Risk Shift</div>',
-        '            <div class="dashboard-panel glass-panel" id="guardian-console-anchor">',
-        '              <div class="dashboard-topline"><span>USafe City Intelligence</span><span>Live</span></div>',
-        '              <div class="dashboard-score"><strong>82</strong><span>route confidence</span></div>',
-        '              <div class="dashboard-route"><span>Campus to home</span><span>Safer path selected</span></div>',
-        '              <div class="dashboard-progress"><span></span></div>',
+        '        <div class="hero-visual hero-visual-phone" id="hero-visual">',
+        '          <div class="mobile-showcase" data-mobile-showcase>',
+        '            <div class="mobile-device-shell">',
+        '              <div class="mobile-device">',
+        '                <div class="mobile-device-notch"></div>',
+        '                <div class="mobile-screen-wrap">',
+        '                  <img class="mobile-screen" data-mobile-screen alt="USafe app preview" draggable="false">',
+        '                  <div class="mobile-screen-reflection" aria-hidden="true"></div>',
+        '                  <div class="mobile-screen-glow" aria-hidden="true"></div>',
+        '                </div>',
+        '              </div>',
+        '              <div class="mobile-device-shadow" aria-hidden="true"></div>',
         '            </div>',
         '          </div>',
         '        </div>',
@@ -233,6 +237,14 @@ export function renderLanding(root, content) {
         '        <span class="eyebrow">', content.howItWorks.label, '</span>',
         '        <h2>', content.howItWorks.title, '</h2>',
         '        <p>', content.howItWorks.intro, '</p>',
+        '      </div>',
+        '      <div class="container hero-confidence-wrap" data-reveal>',
+        '        <div class="dashboard-panel glass-panel hero-confidence-panel" id="guardian-console-anchor">',
+        '          <div class="dashboard-topline"><span>USafe City Intelligence</span><span>Live</span></div>',
+        '          <div class="dashboard-score"><strong>82</strong><span>route confidence</span></div>',
+        '          <div class="dashboard-route"><span>Campus to home</span><span>Safer path selected</span></div>',
+        '          <div class="dashboard-progress"><span></span></div>',
+        '        </div>',
         '      </div>',
         '      <div class="container feature-grid">',
         renderFeatures(content.howItWorks.features),
@@ -358,3 +370,8 @@ export function renderLanding(root, content) {
         '</div>'
     ].join("");
 }
+
+
+
+
+

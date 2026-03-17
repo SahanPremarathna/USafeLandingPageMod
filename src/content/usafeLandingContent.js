@@ -32,6 +32,7 @@ const usafeLandingContent = {
     },
     hero: {
         eyebrow: "PROACTIVE PERSONAL SAFETY",
+        titlePrefix: "See the",
         title: "See the danger before it sees you.",
         description: "USafe predicts risky areas, guides safer routes, and keeps trusted guardians aware of your journey in real time.",
         primaryCta: { label: "Start Safer Journeys", href: "#final-cta" },
@@ -42,13 +43,13 @@ const usafeLandingContent = {
     },
     problem: {
         label: "WHY USAFE",
-        title: "A safer route is only the beginning.",
+        title: "Because Safety Shouldn't Be Reactive",
         intro: "Scroll through how ordinary tools stop at directions, and how USafe expands into awareness, prevention, and response.",
         stages: [
             {
-                title: "Most apps help you move.",
-                text: "Directions, traffic, and arrival time ? but little awareness of personal safety.",
-                tone: "basic",
+                title: "Protection, awareness, and response in one system.",
+                text: "USafe combines real-time safety intelligence, reliable SOS, silent emergency help, and guardian monitoring into one proactive safety platform.",
+                tone: "protect",
                 kicker: "Stage 1"
             },
             {
@@ -64,9 +65,9 @@ const usafeLandingContent = {
                 kicker: "Stage 3"
             },
             {
-                title: "Protection, awareness, and response in one system.",
-                text: "USafe combines real-time safety intelligence, reliable SOS, silent emergency help, and guardian monitoring into one proactive safety platform.",
-                tone: "protect",
+                title: "Most apps help you move.",
+                text: "Directions, traffic, and arrival time ? but little awareness of personal safety.",
+                tone: "basic",
                 kicker: "Stage 4"
             }
         ]
@@ -195,4 +196,8 @@ const usafeLandingContent = {
 };
 
 export default usafeLandingContent;
+
+
+
+
 

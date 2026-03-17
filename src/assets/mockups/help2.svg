@@ -1,0 +1,16 @@
+<svg width="720" height="1440" viewBox="0 0 720 1440" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="1440" rx="72" fill="#081726"/>
+  <rect x="48" y="108" width="624" height="152" rx="34" fill="#0D243C" stroke="#1A5D80"/>
+  <text x="92" y="176" fill="#9FDFFF" font-family="Arial" font-size="34" font-weight="700">Emergency Link</text>
+  <text x="92" y="220" fill="#7F9FBE" font-family="Arial" font-size="22">Fast support activation</text>
+  <rect x="84" y="320" width="552" height="300" rx="42" fill="#0D243C" stroke="#1D4D6E"/>
+  <circle cx="360" cy="470" r="108" fill="#6ACBFF" fill-opacity="0.18"/>
+  <circle cx="360" cy="470" r="70" fill="#6ACBFF" fill-opacity="0.22"/>
+  <text x="326" y="486" fill="#F4F8FC" font-family="Arial" font-size="88" font-weight="700">SOS</text>
+  <rect x="84" y="674" width="552" height="446" rx="42" fill="#0A1D30" stroke="#183D58"/>
+  <text x="124" y="752" fill="#9FDFFF" font-family="Arial" font-size="26" font-weight="700">Response Chain</text>
+  <rect x="124" y="810" width="472" height="92" rx="24" fill="#102942"/>
+  <text x="156" y="864" fill="#F4F8FC" font-family="Arial" font-size="28" font-weight="700">Guardian notified</text>
+  <rect x="124" y="930" width="472" height="92" rx="24" fill="#102942"/>
+  <text x="156" y="984" fill="#F4F8FC" font-family="Arial" font-size="28" font-weight="700">Live location shared</text>
+</svg>

@@ -68,8 +68,9 @@
 
 .hero-actions {
     display: flex;
-    gap: 14px;
+    gap: 16px;
     flex-wrap: wrap;
+    margin-top: 0;
 }
 
 .centered-actions {
@@ -197,3 +198,4 @@
         flex-direction: column;
     }
 }
+

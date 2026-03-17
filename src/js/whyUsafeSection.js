@@ -3,7 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function initWhyUsafeSection() {
+export function initWhyUsafeSection(lenis) {
     var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var section = document.getElementById("problem");
 
@@ -18,71 +18,46 @@ export function initWhyUsafeSection() {
             var stages = gsap.utils.toArray("[data-problem-stage]", section);
             var dots = gsap.utils.toArray("[data-problem-dot]", section);
             var lastStageIndex = stages.length - 1;
-            var activeStageIndex = 0;
-            var isStageJumping = false;
-            var stageJumpTimer = null;
-            var hardScrollThreshold = 100;
 
             if (!pinWrap || !track || stages.length === 0) {
                 return;
             }
 
             function setActiveStage(index) {
-                activeStageIndex = index;
                 stages.forEach(function (stage, stageIndex) {
-                    stage.classList.toggle("is-active", stageIndex === index);
+                    var isActive = stageIndex === index;
+                    stage.classList.toggle("is-active", isActive);
                 });
 
                 dots.forEach(function (dot, dotIndex) {
-                    dot.classList.toggle("is-active", dotIndex === index);
-                    dot.setAttribute("aria-pressed", dotIndex === index ? "true" : "false");
+                    var isActive = dotIndex === index;
+                    dot.classList.toggle("is-active", isActive);
+                    dot.setAttribute("aria-pressed", isActive ? "true" : "false");
                 });
-            }
-
-            function directionalStageSnap(value, trigger) {
-                if (lastStageIndex <= 0) {
-                    return 0;
-                }
-
-                var raw = value * lastStageIndex;
-                var snappedIndex = trigger.direction >= 0 ? Math.ceil(raw) : Math.floor(raw);
-
-                return gsap.utils.clamp(0, lastStageIndex, snappedIndex) / lastStageIndex;
-            }
-
-            function cancelStageJump() {
-                releaseStageJumpLock();
-            }
-
-            function releaseStageJumpLock() {
-                isStageJumping = false;
-
-                if (stageJumpTimer) {
-                    window.clearTimeout(stageJumpTimer);
-                    stageJumpTimer = null;
-                }
             }
 
             function jumpToStage(index) {
                 var trigger = scrollTween.scrollTrigger;
                 var clampedIndex = gsap.utils.clamp(0, lastStageIndex, index);
+                var targetScroll;
 
                 if (!trigger) {
                     return;
                 }
 
-                isStageJumping = true;
-                setActiveStage(clampedIndex);
-                window.scrollTo({
-                    top: trigger.start + ((trigger.end - trigger.start) * (clampedIndex / Math.max(1, lastStageIndex))),
-                    behavior: "smooth"
-                });
+                targetScroll = trigger.start + ((trigger.end - trigger.start) * (clampedIndex / Math.max(1, lastStageIndex)));
 
-                if (stageJumpTimer) {
-                    window.clearTimeout(stageJumpTimer);
+                if (lenis) {
+                    lenis.scrollTo(targetScroll, {
+                        duration: 0.35
+                    });
+                    return;
                 }
 
-                stageJumpTimer = window.setTimeout(releaseStageJumpLock, 560);
+                window.scrollTo({
+                    top: targetScroll,
+                    behavior: "auto"
+                });
             }
 
             setActiveStage(0);
@@ -94,14 +69,7 @@ export function initWhyUsafeSection() {
                     trigger: pinWrap,
                     start: "top top",
                     end: "+=" + String(pinWrap.offsetWidth * Math.max(0.26, (stages.length - 1) * 0.26)),
-                    scrub: 0.04,
-                    snap: {
-                        snapTo: directionalStageSnap,
-                        duration: { min: 0.32, max: 0.58 },
-                        delay: 0,
-                        inertia: false,
-                        ease: "power3.out"
-                    },
+                    scrub: true,
                     onUpdate: function (self) {
                         var stageIndex = Math.round(self.progress * lastStageIndex);
                         setActiveStage(stageIndex);
@@ -110,8 +78,6 @@ export function initWhyUsafeSection() {
                         var stageIndex = Math.round(self.progress * lastStageIndex);
                         setActiveStage(stageIndex);
                     },
-                    onScrubComplete: releaseStageJumpLock,
-                    onSnapComplete: releaseStageJumpLock,
                     pin: true,
                     anticipatePin: 1,
                     invalidateOnRefresh: true
@@ -123,38 +89,6 @@ export function initWhyUsafeSection() {
                     jumpToStage(dotIndex);
                 });
             });
-
-            function handlePinnedWheel(event) {
-                var trigger = scrollTween.scrollTrigger;
-                var deltaY = event.deltaY || 0;
-
-                if (!trigger || !trigger.isActive || Math.abs(deltaY) < 4) {
-                    return;
-                }
-
-                if (isStageJumping) {
-                    if (Math.abs(deltaY) >= hardScrollThreshold) {
-                        cancelStageJump();
-                        return;
-                    }
-
-                    event.preventDefault();
-                    return;
-                }
-
-                if (deltaY > 0 && activeStageIndex < lastStageIndex) {
-                    event.preventDefault();
-                    jumpToStage(activeStageIndex + 1);
-                    return;
-                }
-
-                if (deltaY < 0 && activeStageIndex > 0) {
-                    event.preventDefault();
-                    jumpToStage(activeStageIndex - 1);
-                }
-            }
-
-            window.addEventListener("wheel", handlePinnedWheel, { passive: false });
 
             stages.forEach(function (stage, index) {
                 var copy = stage.querySelector(".problem-stage-copy");
@@ -312,5 +246,3 @@ export function initWhyUsafeSection() {
         }
     });
 }
-
-
