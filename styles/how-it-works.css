@@ -527,8 +527,8 @@ button {
 .scene-bullets li,
 .capability-why strong,
 .hero-score-pill,
-.hero-stack-card strong,
-.hero-stack-card span,
+.layered-safety-card strong,
+.layered-safety-label,
 .hero-metric small,
 .scene-core-head span,
 .scene-core-metric span,
@@ -622,33 +622,190 @@ button {
     font-weight: 700;
 }
 
-.hero-stack-grid {
-    display: grid;
-    gap: 14px;
+.hero-stack-wrap {
+    margin-top: 8px;
 }
 
-.hero-stack-card {
+.layered-safety-stack {
+    position: relative;
+    min-height: 250px;
+}
+
+.layered-safety-ambient {
+    position: absolute;
+    inset: 4px 12px auto;
+    height: 232px;
+    border-radius: 36px;
+    background: radial-gradient(circle at 50% 20%, rgba(101, 211, 255, 0.14), rgba(101, 211, 255, 0.05) 34%, transparent 72%);
+    filter: blur(16px);
+    opacity: 0.92;
+    pointer-events: none;
+}
+
+.layered-safety-tilt {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    transform-style: preserve-3d;
+    transition: transform 220ms cubic-bezier(.22,1,.36,1);
+    will-change: transform;
+}
+
+.layered-safety-stack-scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(15deg) rotateY(-18deg);
+}
+
+.layered-safety-spine {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    width: 3px;
+    height: 150px;
+    transform: translate(-50%, -50%) translateZ(28px);
+    border-radius: 999px;
+    background: linear-gradient(to bottom, rgba(130, 219, 255, 0), rgba(130, 219, 255, 0.98), rgba(130, 219, 255, 0));
+    box-shadow: 0 0 14px rgba(130, 219, 255, 0.24);
+    opacity: 0.58;
+    pointer-events: none;
+}
+
+.layered-safety-core {
+    position: absolute;
+    left: 50%;
+    top: 49%;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) translateZ(72px);
+    background: radial-gradient(circle at center, rgba(184, 235, 255, 0.92), rgba(121, 211, 255, 0.22) 44%, rgba(121, 211, 255, 0.04) 72%, transparent 76%);
+    opacity: 0.46;
+    pointer-events: none;
+}
+
+.layered-safety-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 332px;
+    height: 136px;
+    border-radius: 26px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    will-change: transform, opacity, filter;
+    transition: transform 1250ms cubic-bezier(.22,1,.36,1), opacity 1250ms cubic-bezier(.22,1,.36,1), filter 1250ms cubic-bezier(.22,1,.36,1);
+}
+
+.layered-safety-card-body {
+    position: absolute;
+    inset: 0;
     padding: 18px 20px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(159, 223, 255, 0.08);
+    border-radius: inherit;
+    border: 1px solid rgba(145, 210, 255, 0.14);
+    backdrop-filter: blur(16px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 18px 40px rgba(0,0,0,0.28);
+    overflow: hidden;
+    transition: border-color 1250ms cubic-bezier(.22,1,.36,1), box-shadow 1250ms cubic-bezier(.22,1,.36,1);
 }
 
-.hero-stack-card span,
-.hero-stack-card strong {
-    display: block;
+.layered-safety-card-body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 18%, rgba(255,255,255,0.1) 50%, transparent 82%);
+    transform: translateX(-120%);
+    pointer-events: none;
 }
 
-.hero-stack-card span {
-    margin-bottom: 6px;
-    color: #9fdfff;
-    font-size: 0.72rem;
+.layered-safety-card-awareness .layered-safety-card-body {
+    background: radial-gradient(circle at 18% 18%, rgba(120, 213, 255, 0.18), transparent 28%), linear-gradient(135deg, #1c4f8f, #0a1e37);
+}
+
+.layered-safety-card-prevention .layered-safety-card-body {
+    background: radial-gradient(circle at 78% 18%, rgba(96, 255, 225, 0.16), transparent 28%), linear-gradient(135deg, #176a78, #0a2028);
+}
+
+.layered-safety-card-response .layered-safety-card-body {
+    background: radial-gradient(circle at 52% 18%, rgba(172, 152, 255, 0.16), transparent 28%), linear-gradient(135deg, #394aa8, #141d48);
+}
+
+.layered-safety-card[data-stack-slot="0"] {
+    z-index: 3;
+    opacity: 1;
+    filter: blur(0px);
+    transform: translate(-50%, -8px) translateZ(84px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+}
+
+.layered-safety-card[data-stack-slot="1"] {
+    z-index: 2;
+    opacity: 0.92;
+    filter: blur(0.25px);
+    transform: translate(-50%, 30px) translateZ(26px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(0.968);
+}
+
+.layered-safety-card[data-stack-slot="2"] {
+    z-index: 1;
+    opacity: 0.74;
+    filter: blur(1px);
+    transform: translate(-50%, 62px) translateZ(-28px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(0.936);
+}
+
+.layered-safety-card[data-stack-slot="0"] .layered-safety-card-body {
+    border-color: rgba(171, 229, 255, 0.95);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 30px 72px rgba(0,0,0,0.36), 0 0 0 1px rgba(195, 238, 255, 0.14), 0 0 32px rgba(128, 216, 255, 0.16);
+}
+
+.layered-safety-card[data-stack-slot="1"] .layered-safety-card-body {
+    border-color: rgba(145, 210, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 20px 44px rgba(0,0,0,0.28);
+}
+
+.layered-safety-card[data-stack-slot="2"] .layered-safety-card-body {
+    border-color: rgba(145, 210, 255, 0.14);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 14px 28px rgba(0,0,0,0.22);
+}
+
+.layered-safety-card-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.layered-safety-label {
+    margin-bottom: 0;
+    color: #c9efff;
+    font-size: 0.8rem;
     font-weight: 800;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
-.hero-stack-card strong,
+.layered-safety-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d4f3ff;
+    box-shadow: 0 0 12px rgba(212, 243, 255, 0.9);
+    flex-shrink: 0;
+}
+
+.layered-safety-card strong {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 16px;
+    max-width: 12ch;
+    font-size: 1.36rem;
+    line-height: 1.08;
+}
+
+.layered-safety-card strong,
 .scene-core-metric strong,
 .response-split strong,
 .capability-card h3,
@@ -1428,6 +1585,14 @@ button {
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.32);
     }
 
+    .layered-safety-card strong {
+        font-size: 1.16rem;
+    }
+
+    .layered-safety-label {
+        font-size: 0.74rem;
+    }
+
     .nav-panel.active {
         display: flex;
     }
@@ -1525,6 +1690,13 @@ button {
         scroll-behavior: auto !important;
     }
 }
+
+
+
+
+
+
+
 
 
 

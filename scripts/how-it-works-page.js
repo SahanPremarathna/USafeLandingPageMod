@@ -2,6 +2,7 @@
 import { initHowItWorksParallax } from "./how-it-works-parallax.js";
 import { initHowItWorksNodes } from "./how-it-works-nodes.js";
 import { initHowItWorksScrollScenes } from "./how-it-works-scroll-scenes.js";
+import { initLayeredSafetyStack } from "./layered-safety-stack.js";
 import { initSectionBackgroundVideos } from "./section-background-videos.js";
 
 const howItWorksSectionMedia = {
@@ -180,6 +181,48 @@ function renderBullets(items) {
     }).join("");
 }
 
+function getLayeredSafetyTone(item, index) {
+    var label = String((item && item.label) || "").toLowerCase();
+    if (label.indexOf("aware") !== -1) {
+        return "awareness";
+    }
+    if (label.indexOf("prevent") !== -1) {
+        return "prevention";
+    }
+    if (label.indexOf("response") !== -1) {
+        return "response";
+    }
+    return ["awareness", "prevention", "response"][index] || "awareness";
+}
+
+function renderLayeredSafetyStack(items) {
+    return [
+        '<div class="layered-safety-stack" data-layered-safety-stack>',
+        '  <div class="layered-safety-ambient" aria-hidden="true"></div>',
+        '  <div class="layered-safety-tilt" data-layered-safety-stack-tilt>',
+        '    <div class="layered-safety-stack-scene" data-layered-safety-stack-scene>',
+        '      <div class="layered-safety-spine" aria-hidden="true"></div>',
+        '      <div class="layered-safety-core" aria-hidden="true"></div>',
+               items.map(function (item, index) {
+                   var tone = getLayeredSafetyTone(item, index);
+                   return [
+                       '      <article class="layered-safety-card layered-safety-card-' + tone + '" data-layered-safety-card data-stack-slot="' + String(index) + '">',
+                       '        <div class="layered-safety-card-body">',
+                       '          <div class="layered-safety-card-topline">',
+                       '            <span class="layered-safety-label">' + item.label + '</span>',
+                       '            <span class="layered-safety-dot" aria-hidden="true"></span>',
+                       '          </div>',
+                       '          <strong>' + item.value + '</strong>',
+                       '        </div>',
+                       '      </article>'
+                   ].join('');
+               }).join(''),
+        '    </div>',
+        '  </div>',
+        '</div>'
+    ].join('');
+}
+
 function splitHeadingLines(title, preferredLines) {
     var words = String(title || "").trim().split(/\\s+/).filter(Boolean);
     var lineCount = Math.max(1, Math.min(preferredLines || 2, words.length));
@@ -343,25 +386,11 @@ function renderPage(content) {
         '        <a class="button button-secondary" href="' + content.hero.secondaryCta.href + '">' + content.hero.secondaryCta.label + '</a>',
         '      </div>',
         '    </div>',
-        '    <div class="hero-panel reveal" data-how-reveal data-how-side="right" data-how-delay="180" data-how-depth data-depth-strength="3">',
-        '      <div class="hero-panel-shell">',
-        '        <div class="hero-panel-head">',
-        '          <span>' + content.hero.stackLabel + '</span>',
-        '          <strong>' + content.hero.liveLabel + '</strong>',
+        '    <div class="hero-panel reveal" data-how-reveal data-how-side="right" data-how-delay="180">',
+        '      <div class="hero-panel-shell hero-panel-shell-stack">',
+        '        <div class="hero-stack-wrap reveal" data-how-reveal data-how-delay="220">',
+        '          ' + renderLayeredSafetyStack(content.hero.stack) + '',
         '        </div>',
-        '        <div class="hero-score-row">',
-        '          <div class="hero-metric">',
-        '            <small>' + content.hero.metricLabel + '</small>',
-        '            <strong class="hero-score-number" data-score-target="' + String(content.hero.metricValue) + '">0</strong>',
-        '          </div>',
-        '          <div class="hero-score-pill reveal" data-how-reveal data-how-delay="240">' + content.hero.routeChip + '</div>',
-        '        </div>',
-        '        <div class="hero-stack-grid">',
-                    content.hero.stack.map(function (item, index) {
-                        return '<article class="hero-stack-card reveal" data-how-reveal data-how-delay="' + String(280 + (index * 90)) + '"><span>' + item.label + '</span><strong>' + item.value + '</strong></article>';
-                    }).join(''),
-        '        </div>',
-        '        <div class="hero-panel-sweep" aria-hidden="true"></div>',
         '      </div>',
         '    </div>',
         '  </div>',
@@ -466,11 +495,18 @@ function initHowItWorksPage() {
     initSectionBackgroundVideos(howItWorksSectionMedia, document);
     initHowItWorksAnimations(document);
     initHowItWorksParallax(document);
+    initLayeredSafetyStack(document);
     initHowItWorksNodes(document);
     initHowItWorksScrollScenes(document);
 }
 
 initHowItWorksPage();
+
+
+
+
+
+
 
 
 

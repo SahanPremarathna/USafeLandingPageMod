@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USafe Final Layer Stack Demo</title>
+  <style>
+    :root {
+      --bg-1: #020814;
+      --bg-2: #03111f;
+      --text: #edf6ff;
+      --muted: rgba(237, 246, 255, 0.68);
+
+      --awareness-1: #1c4f8f;
+      --awareness-2: #0a1e37;
+
+      --prevention-1: #176a78;
+      --prevention-2: #0a2028;
+
+      --response-1: #394aa8;
+      --response-2: #141d48;
+
+      --glow-a: rgba(98, 196, 255, 0.34);
+      --glow-b: rgba(70, 255, 218, 0.26);
+      --glow-c: rgba(145, 135, 255, 0.28);
+
+      --front-border: rgba(171, 229, 255, 0.95);
+      --mid-border: rgba(145, 210, 255, 0.25);
+      --back-border: rgba(145, 210, 255, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 18%, rgba(68, 145, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 82% 26%, rgba(94, 221, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 48%, #041523 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(86, 156, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(86, 156, 255, 0.05) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: 0.22;
+      mask-image: radial-gradient(circle at center, black 56%, transparent 100%);
+    }
+
+    .wrap {
+      width: min(1220px, 92vw);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .copy {
+      padding-right: 1.5rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.78rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 214, 255, 0.18);
+      background: rgba(9, 19, 35, 0.52);
+      color: #b9e7ff;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+      font-weight: 800;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin: 1rem 0 1rem;
+      font-size: clamp(3rem, 6vw, 6rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      max-width: 7ch;
+    }
+
+    h1 span {
+      color: #e5f7ff;
+      text-shadow:
+        0 0 18px rgba(123, 210, 255, 0.45),
+        0 0 40px rgba(123, 210, 255, 0.16);
+    }
+
+    .copy p {
+      margin: 0;
+      max-width: 37rem;
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.75;
+    }
+
+    .scene {
+      position: relative;
+      height: 640px;
+      display: grid;
+      place-items: center;
+      perspective: 1800px;
+    }
+
+    .ambient {
+      position: absolute;
+      width: 560px;
+      height: 560px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(109, 205, 255, 0.20) 0%, rgba(109, 205, 255, 0.08) 38%, transparent 70%);
+      filter: blur(30px);
+      opacity: 0.9;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: scale(0.96);
+        opacity: 0.72;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.96;
+      }
+    }
+
+    .stack-tilt {
+      width: 460px;
+      height: 390px;
+      transform-style: preserve-3d;
+      transition: transform 220ms cubic-bezier(.22,1,.36,1);
+      will-change: transform;
+    }
+
+    .stack {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transform: rotateX(18deg) rotateY(-22deg);
+    }
+
+    .spine {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 4px;
+      height: 240px;
+      transform: translate(-50%, -50%) translateZ(34px);
+      border-radius: 999px;
+      background: linear-gradient(
+        to bottom,
+        rgba(130, 219, 255, 0),
+        rgba(130, 219, 255, 0.98),
+        rgba(130, 219, 255, 0)
+      );
+      box-shadow: 0 0 18px rgba(130, 219, 255, 0.38);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) translateZ(84px);
+      background:
+        radial-gradient(circle at center,
+          rgba(184, 235, 255, 0.95),
+          rgba(121, 211, 255, 0.30) 42%,
+          rgba(121, 211, 255, 0.06) 70%,
+          transparent 74%);
+      animation: corePulse 3.2s ease-in-out infinite;
+      opacity: 0.64;
+      pointer-events: none;
+    }
+
+    @keyframes corePulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) translateZ(84px) scale(0.94);
+      }
+      50% {
+        transform: translate(-50%, -50%) translateZ(84px) scale(1.08);
+      }
+    }
+
+    .card {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 370px;
+      height: 156px;
+      border-radius: 30px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      backdrop-filter: blur(16px);
+      will-change: transform, opacity, filter, box-shadow, border-color;
+      border: 1px solid var(--back-border);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 18px 40px rgba(0,0,0,0.28);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent 18%,
+        rgba(255,255,255,0.10) 50%,
+        transparent 82%
+      );
+      transform: translateX(-120%);
+      animation: sheen 5.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sheen {
+      0%, 76%, 100% {
+        transform: translateX(-120%);
+      }
+      88% {
+        transform: translateX(120%);
+      }
+    }
+
+    .card.awareness {
+      background:
+        radial-gradient(circle at 18% 18%, rgba(120, 213, 255, 0.18), transparent 28%),
+        linear-gradient(135deg, var(--awareness-1), var(--awareness-2));
+    }
+
+    .card.prevention {
+      background:
+        radial-gradient(circle at 78% 18%, rgba(96, 255, 225, 0.16), transparent 28%),
+        linear-gradient(135deg, var(--prevention-1), var(--prevention-2));
+    }
+
+    .card.response {
+      background:
+        radial-gradient(circle at 52% 18%, rgba(172, 152, 255, 0.16), transparent 28%),
+        linear-gradient(135deg, var(--response-1), var(--response-2));
+    }
+
+    .content {
+      position: absolute;
+      inset: 0;
+      padding: 1.18rem 1.28rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #c9efff;
+      font-weight: 800;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d4f3ff;
+      box-shadow: 0 0 12px rgba(212, 243, 255, 0.9);
+      flex-shrink: 0;
+    }
+
+    .title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-top: 0.18rem;
+    }
+
+    .sub {
+      font-size: 0.96rem;
+      line-height: 1.55;
+      color: rgba(237, 246, 255, 0.78);
+      max-width: 88%;
+    }
+
+    .status {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.84rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(237, 246, 255, 0.48);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 980px) {
+      body {
+        overflow: auto;
+      }
+
+      .wrap {
+        grid-template-columns: 1fr;
+        padding: 3rem 1.2rem;
+      }
+
+      .copy {
+        padding-right: 0;
+        text-align: center;
+      }
+
+      h1,
+      .copy p {
+        max-width: none;
+      }
+
+      .scene {
+        height: 540px;
+      }
+
+      .stack-tilt {
+        width: 330px;
+        height: 330px;
+      }
+
+      .card {
+        width: 294px;
+        height: 136px;
+      }
+
+      .title {
+        font-size: 1.18rem;
+      }
+
+      .sub {
+        font-size: 0.88rem;
+        max-width: 100%;
+      }
+
+      .status {
+        bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="wrap">
+    <div class="copy">
+      <div class="eyebrow">How USafe Works</div>
+      <h1>
+        A layered
+        stack that
+        moves
+        <span>as one.</span>
+      </h1>
+      <p>
+        The front layer lifts, glides to the back, and the remaining layers move
+        forward seamlessly. The whole stack also tilts gently with mouse movement
+        so it feels like a real connected safety object.
+      </p>
+    </div>
+
+    <div class="scene" id="scene">
+      <div class="ambient"></div>
+
+      <div class="stack-tilt" id="stackTilt">
+        <div class="stack">
+          <div class="spine"></div>
+          <div class="core"></div>
+
+          <article class="card awareness" id="card-awareness">
+            <div class="content">
+              <div class="topline">
+                <div class="label">Awareness</div>
+                <div class="dot"></div>
+              </div>
+              <div class="title">Live risk signals</div>
+              <div class="sub">Reads route context early and surfaces signals before uncertainty becomes pressure.</div>
+            </div>
+          </article>
+
+          <article class="card prevention" id="card-prevention">
+            <div class="content">
+              <div class="topline">
+                <div class="label">Prevention</div>
+                <div class="dot"></div>
+              </div>
+              <div class="title">Safer path selected</div>
+              <div class="sub">Guides movement toward safer decisions before the journey becomes reactive.</div>
+            </div>
+          </article>
+
+          <article class="card response" id="card-response">
+            <div class="content">
+              <div class="topline">
+                <div class="label">Response</div>
+                <div class="dot"></div>
+              </div>
+              <div class="title">Guardian support ready</div>
+              <div class="sub">Keeps support prepared in the background when travel patterns start to break.</div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="status">Seamless auto-cycling 3-layer stack</div>
+    </div>
+  </section>
+
+  <script>
+    const cards = [
+      document.getElementById("card-awareness"),
+      document.getElementById("card-prevention"),
+      document.getElementById("card-response")
+    ];
+
+    const scene = document.getElementById("scene");
+    const stackTilt = document.getElementById("stackTilt");
+
+    let order = [0, 1, 2];
+    let animating = false;
+
+    const basePositions = {
+      front: {
+        x: -50,
+        y: -42,
+        z: 125,
+        scale: 1,
+        rx: 0,
+        ry: 0,
+        rz: 0,
+        opacity: 1,
+        blur: 0
+      },
+      middle: {
+        x: -50,
+        y: 18,
+        z: 42,
+        scale: 0.968,
+        rx: 0,
+        ry: 0,
+        rz: 0,
+        opacity: 0.92,
+        blur: 0.25
+      },
+      back: {
+        x: -50,
+        y: 76,
+        z: -46,
+        scale: 0.932,
+        rx: 0,
+        ry: 0,
+        rz: 0,
+        opacity: 0.74,
+        blur: 1
+      }
+    };
+
+    function transformString(p) {
+      return `
+        translate(${p.x}%, ${p.y}px)
+        translateZ(${p.z}px)
+        rotateX(${p.rx}deg)
+        rotateY(${p.ry}deg)
+        rotateZ(${p.rz}deg)
+        scale(${p.scale})
+      `;
+    }
+
+    function setCardVisual(card, posName) {
+      const p = basePositions[posName];
+      card.style.transform = transformString(p);
+      card.style.opacity = p.opacity;
+      card.style.filter = `blur(${p.blur}px)`;
+
+      if (posName === "front") {
+        card.style.borderColor = "var(--front-border)";
+        card.style.boxShadow = `
+          inset 0 1px 0 rgba(255,255,255,0.08),
+          0 30px 72px rgba(0,0,0,0.36),
+          0 0 0 1px rgba(195, 238, 255, 0.14),
+          0 0 32px rgba(128, 216, 255, 0.16)
+        `;
+      } else if (posName === "middle") {
+        card.style.borderColor = "var(--mid-border)";
+        card.style.boxShadow = `
+          inset 0 1px 0 rgba(255,255,255,0.05),
+          0 20px 44px rgba(0,0,0,0.28)
+        `;
+      } else {
+        card.style.borderColor = "var(--back-border)";
+        card.style.boxShadow = `
+          inset 0 1px 0 rgba(255,255,255,0.04),
+          0 14px 28px rgba(0,0,0,0.22)
+        `;
+      }
+    }
+
+    function applyStaticPositions() {
+      cards.forEach(card => {
+        card.style.transition = "none";
+      });
+
+      setCardVisual(cards[order[0]], "front");
+      setCardVisual(cards[order[1]], "middle");
+      setCardVisual(cards[order[2]], "back");
+
+      requestAnimationFrame(() => {
+        cards.forEach(card => {
+          card.style.transition = `
+            transform 1250ms cubic-bezier(.22,1,.36,1),
+            opacity 1250ms cubic-bezier(.22,1,.36,1),
+            filter 1250ms cubic-bezier(.22,1,.36,1),
+            box-shadow 1250ms cubic-bezier(.22,1,.36,1),
+            border-color 1250ms cubic-bezier(.22,1,.36,1)
+          `;
+        });
+      });
+    }
+
+    function animateCycle() {
+      if (animating) return;
+      animating = true;
+
+      const frontCard = cards[order[0]];
+      const middleCard = cards[order[1]];
+      const backCard = cards[order[2]];
+
+      // Phase 1: lift the front card
+      frontCard.style.transform = `
+        translate(-50%, -120px)
+        translateZ(158px)
+        rotateX(-3deg)
+        rotateY(3deg)
+        rotateZ(1.2deg)
+        scale(1.02)
+      `;
+      frontCard.style.borderColor = "rgba(220, 247, 255, 1)";
+      frontCard.style.boxShadow = `
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        0 42px 90px rgba(0,0,0,0.40),
+        0 0 0 1px rgba(215, 244, 255, 0.18),
+        0 0 42px rgba(137, 221, 255, 0.20)
+      `;
+
+      // Other cards start easing forward
+      middleCard.style.transform = `
+        translate(-50%, -2px)
+        translateZ(82px)
+        rotateX(0deg)
+        rotateY(0deg)
+        rotateZ(0deg)
+        scale(0.984)
+      `;
+      middleCard.style.opacity = "0.96";
+      middleCard.style.filter = "blur(0.1px)";
+
+      backCard.style.transform = `
+        translate(-50%, 42px)
+        translateZ(8px)
+        rotateX(0deg)
+        rotateY(0deg)
+        rotateZ(0deg)
+        scale(0.95)
+      `;
+      backCard.style.opacity = "0.86";
+      backCard.style.filter = "blur(0.45px)";
+
+      // Phase 2: front card glides backward
+      setTimeout(() => {
+        frontCard.style.transform = `
+          translate(-50%, 98px)
+          translateZ(-68px)
+          rotateX(0deg)
+          rotateY(-8deg)
+          rotateZ(-2deg)
+          scale(0.92)
+        `;
+        frontCard.style.opacity = "0.7";
+        frontCard.style.filter = "blur(1.1px)";
+        frontCard.style.borderColor = "var(--back-border)";
+        frontCard.style.boxShadow = `
+          inset 0 1px 0 rgba(255,255,255,0.04),
+          0 14px 28px rgba(0,0,0,0.22)
+        `;
+
+        middleCard.style.transform = `
+          translate(-50%, -42px)
+          translateZ(125px)
+          rotateX(0deg)
+          rotateY(0deg)
+          rotateZ(0deg)
+          scale(1)
+        `;
+        middleCard.style.opacity = "1";
+        middleCard.style.filter = "blur(0px)";
+        middleCard.style.borderColor = "var(--front-border)";
+        middleCard.style.boxShadow = `
+          inset 0 1px 0 rgba(255,255,255,0.08),
+          0 30px 72px rgba(0,0,0,0.36),
+          0 0 0 1px rgba(195, 238, 255, 0.14),
+          0 0 32px rgba(128, 216, 255, 0.16)
+        `;
+
+        backCard.style.transform = `
+          translate(-50%, 18px)
+          translateZ(42px)
+          rotateX(0deg)
+          rotateY(0deg)
+          rotateZ(0deg)
+          scale(0.968)
+        `;
+        backCard.style.opacity = "0.92";
+        backCard.style.filter = "blur(0.25px)";
+        backCard.style.borderColor = "var(--mid-border)";
+        backCard.style.boxShadow = `
+          inset 0 1px 0 rgba(255,255,255,0.05),
+          0 20px 44px rgba(0,0,0,0.28)
+        `;
+      }, 420);
+
+      // Phase 3: settle and reorder
+      setTimeout(() => {
+        order.push(order.shift());
+        applyStaticPositions();
+        animating = false;
+      }, 1450);
+    }
+
+    applyStaticPositions();
+
+    setTimeout(() => {
+      animateCycle();
+      setInterval(animateCycle, 3200);
+    }, 900);
+
+    // Mouse tilt for the whole stack
+    scene.addEventListener("mousemove", (e) => {
+      const rect = scene.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+
+      const rx = (0.5 - py) * 10;
+      const ry = (px - 0.5) * 14;
+
+      stackTilt.style.transform = `
+        rotateX(${rx}deg)
+        rotateY(${ry}deg)
+      `;
+    });
+
+    scene.addEventListener("mouseleave", () => {
+      stackTilt.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    });
+  </script>
+</body>
+</html>

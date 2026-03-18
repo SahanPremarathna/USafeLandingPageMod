@@ -197,16 +197,25 @@
     opacity: 0.58;
 }
 
-.hero-stack-card:nth-child(1) {
-    animation: stackPulse 6s ease-in-out infinite;
+.story-section.is-active .layered-safety-ambient {
+    animation: layeredSafetyBreathe 5s ease-in-out infinite;
 }
 
-.hero-stack-card:nth-child(2) {
-    animation: stackPulse 6s ease-in-out infinite 0.6s;
+.story-section.is-active .layered-safety-core {
+    animation: layeredSafetyCorePulse 3.2s ease-in-out infinite;
 }
 
-.hero-stack-card:nth-child(3) {
-    animation: stackPulse 6s ease-in-out infinite 1.2s;
+.story-section.is-active .layered-safety-card[data-stack-slot="0"] .layered-safety-card-body {
+    animation: stackPulseFront 5.8s ease-in-out infinite;
+}
+
+.story-section.is-active .layered-safety-card[data-stack-slot="1"] .layered-safety-card-body,
+.story-section.is-active .layered-safety-card[data-stack-slot="2"] .layered-safety-card-body {
+    animation: stackPulseBack 5.8s ease-in-out infinite;
+}
+
+.story-section.is-active .layered-safety-card .layered-safety-card-body::before {
+    animation: layeredSafetySheen 5.4s ease-in-out infinite;
 }
 
 .story-section.is-active .scene-ring,
@@ -229,7 +238,6 @@
 
 .story-section.is-active .guardian-message-card,
 .story-section.is-active .guardian-support-card,
-.story-section.is-active .hero-stack-card,
 .story-section.is-active .scene-micro-list span {
     animation: panelBreath 6.8s ease-in-out infinite;
 }
@@ -469,3 +477,27 @@
         clip-path: inset(34% 0 28% 0);
     }
 }
+
+@keyframes stackPulseFront {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+        box-shadow: 0 28px 68px rgba(6, 18, 35, 0.42), 0 0 0 1px rgba(203, 238, 255, 0.1) inset, 0 0 34px rgba(92, 189, 255, 0.18);
+    }
+    50% {
+        transform: translate3d(0, -3px, 0) scale(1.014);
+        box-shadow: 0 34px 80px rgba(6, 18, 35, 0.5), 0 0 0 1px rgba(214, 244, 255, 0.14) inset, 0 0 42px rgba(112, 204, 255, 0.24);
+    }
+}
+
+@keyframes stackPulseBack {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+        transform: translate3d(0, -2px, 0) scale(1.008);
+    }
+}
+
+
+
+
