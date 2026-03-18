@@ -85,6 +85,9 @@ function renderProblemStages(stages) {
             '    <div class="problem-stage-visual" aria-hidden="true">',
             '      <div class="problem-visual-backdrop"></div>',
             '      <div class="problem-grid-plane"></div>',
+            (stage.tone === "awareness" ? '      <lord-icon src="https://cdn.lordicon.com/ilhuppkd.json" trigger="loop" state="loop-cycle" colors="primary:#e5d1fa,secondary:#e5d1fa" class="problem-live-icon problem-live-icon-awareness"></lord-icon>' : ''),
+            (stage.tone === "prevention" ? '      <div class="problem-live-icon-prevention"><lord-icon src="https://cdn.lordicon.com/lltgvngb.json" trigger="loop" colors="primary:#c71f16,secondary:#e83a30" stroke="light" class="problem-live-icon-prevention-danger"></lord-icon><lord-icon src="https://cdn.lordicon.com/onmwuuox.json" trigger="loop" state="in-jump-dynamic" colors="primary:#ee6d66,secondary:#e5d1fa" class="problem-live-icon-prevention-location"></lord-icon></div>' : ''),
+            (stage.tone === "response" ? '      <lord-icon src="https://cdn.lordicon.com/tkwytimu.json" trigger="loop" colors="primary:#7166ee,secondary:#f4a09c" class="problem-live-icon problem-live-icon-response"></lord-icon>' : ''),
             '      <div class="problem-scan problem-scan-a"></div>',
             '      <div class="problem-scan problem-scan-b"></div>',
             '      <div class="problem-route problem-route-main"></div>',
@@ -293,6 +296,11 @@ export function renderLanding(root, content) {
         '</div>'
     ].join("");
 }
+
+
+
+
+
 
 
 

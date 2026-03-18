@@ -19,7 +19,7 @@ const howItWorksSectionMedia = {
 const howItWorksContent = {
     hero: {
         label: "HOW USAFE WORKS",
-        title: "A layered safety system that feels Immediate.",
+        title: "A Layered Safety system that Feels Immediate.",
         body: "Each core capability is designed to work alone and together, giving users a complete safety stack instead of a single panic feature.",
         primaryCta: { label: "Try USafe", href: "contact.html" },
         secondaryCta: { label: "Meet the Team", href: "team.html" },

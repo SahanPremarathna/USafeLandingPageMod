@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --bg: #020713;
     --panel: rgba(10, 18, 34, 0.76);
     --panel-strong: rgba(8, 15, 29, 0.9);
@@ -253,6 +253,7 @@ ul {
 
 .nav-cta,
 .button {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -261,6 +262,8 @@ ul {
     border-radius: 999px;
     font-size: 0.96rem;
     font-weight: 800;
+    overflow: hidden;
+    isolation: isolate;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
@@ -1140,6 +1143,7 @@ ul {
         width: 100%;
     }
 }
+
 
 
 
