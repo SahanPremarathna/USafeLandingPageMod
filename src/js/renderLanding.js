@@ -62,6 +62,12 @@ function renderProblemChips(chips) {
     }).join("");
 }
 
+function renderProblemHeadline(title) {
+    return String(title || "")
+        .replace('Predictive.', '<span class="problem-word problem-word-predictive">Predictive.</span>')
+        .replace('Reactive.', '<span class="problem-word problem-word-reactive">Reactive.</span>');
+}
+
 function renderProblemStages(stages) {
     return stages.map(function (stage, index) {
         return [
@@ -214,9 +220,9 @@ export function renderLanding(root, content) {
         '      </div>',
         '    </section>',
         '    <section class="content-section story-section" id="problem" data-section-media-key="problem">',        '      <div class="problem-story-shell">',
-        '        <div class="problem-story-intro">',
+        '        <div class="problem-story-intro" data-reveal>',
         '          <span class="eyebrow">', problem.label, '</span>',
-        '          <h2>', problem.title, '</h2>',
+        '          <h2>', renderProblemHeadline(problem.title), '</h2>',
         '          <p>', problem.intro, '</p>',
         '        </div>',
         '        <div class="problem-stage-stack">',

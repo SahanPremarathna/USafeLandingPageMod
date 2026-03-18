@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --bg: #030712;
     --bg-soft: #07111f;
     --panel: rgba(9, 18, 34, 0.74);
@@ -183,6 +183,7 @@ button {
 
 .nav-cta,
 .button {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -191,14 +192,50 @@ button {
     border-radius: 999px;
     font-size: 0.96rem;
     font-weight: 800;
+    overflow: hidden;
+    isolation: isolate;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
 .nav-cta,
-.button-primary {
+.button-primary:not(.nav-cta) {
     color: #06111f;
     background: linear-gradient(135deg, #8ee8ff 0%, #35d5ff 44%, #1194ff 100%);
     box-shadow: 0 20px 40px rgba(17, 148, 255, 0.28);
+}
+
+.button-primary:not(.nav-cta) {
+    animation: primaryButtonBreath 3.8s ease-in-out infinite;
+}
+
+.nav-cta::before,
+.button-primary:not(.nav-cta)::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    opacity: 0.72;
+    z-index: -1;
+}
+
+.nav-cta::before {
+    opacity: 0.44;
+}
+
+.button-primary:not(.nav-cta)::after {
+    content: "";
+    position: absolute;
+    top: -35%;
+    bottom: -35%;
+    left: -34%;
+    width: 34%;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0));
+    transform: translate3d(0, 0, 0) rotate(14deg);
+    opacity: 0;
+    animation: primaryButtonSweep 3.8s ease-in-out infinite;
 }
 
 .button-secondary {
@@ -207,8 +244,7 @@ button {
     background: rgba(255, 255, 255, 0.03);
 }
 
-.nav-cta:hover,
-.button:hover {
+.button:not(.nav-cta):hover {
     transform: translateY(-3px);
 }
 
@@ -263,22 +299,24 @@ button {
 .section-video-layer.is-active {
     opacity: 1;
     transform: scale(1);
-    filter: saturate(1.06) brightness(0.44) contrast(1.12);
+    filter: saturate(0.95) brightness(0.27) contrast(1.07);
 }
 
 .section-video-overlay {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, rgba(2, 7, 18, 0.42), rgba(3, 8, 18, 0.26) 22%, rgba(4, 10, 20, 0.46) 100%),
+        linear-gradient(180deg, rgba(2, 7, 18, 0.66), rgba(3, 8, 18, 0.48) 22%, rgba(4, 10, 20, 0.7) 100%),
         radial-gradient(circle at 20% 18%, rgba(53, 213, 255, 0.08), transparent 28%),
         radial-gradient(circle at 78% 12%, rgba(17, 148, 255, 0.08), transparent 24%);
 }
 
 .story-section {
+    --scene-focus: 0;
     position: relative;
     padding: 36px 0 82px;
     isolation: isolate;
+    overflow: clip;
 }
 
 .story-section::after {
@@ -288,11 +326,11 @@ button {
     z-index: -1;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .how-page > .story-section:nth-of-type(even)::after {
-    opacity: 1;
+    opacity: 0.78;
     background:
         radial-gradient(circle at 20% 32%, rgba(17, 148, 255, 0.12), transparent 32%),
         linear-gradient(180deg, rgba(4, 10, 20, 0.64), rgba(5, 12, 24, 0.78));
@@ -305,6 +343,18 @@ button {
     height: 1px;
     background: linear-gradient(90deg, rgba(122, 161, 255, 0), rgba(122, 161, 255, 0.1), rgba(122, 161, 255, 0));
     pointer-events: none;
+}
+
+.story-section.is-active::after {
+    opacity: 1;
+}
+
+.story-section.is-settled::after {
+    opacity: 0.5;
+}
+
+.story-section.is-upcoming::after {
+    opacity: calc(0.42 + (var(--scene-focus) * 0.42));
 }
 
 .section-kicker {
@@ -425,6 +475,43 @@ button {
 .hero-copy h1 {
     max-width: 10ch;
     font-size: clamp(2.85rem, 5.3vw, 5.7rem);
+}
+
+.hero-keyword-immediate {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.04em;
+    color: #f4fbff;
+    background: linear-gradient(90deg, #f7fcff 0%, #b7e5ff 34%, #f3fbff 58%, #7fc9ff 76%, #ff5f7f 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 18px rgba(171, 223, 255, 0.4), 0 0 36px rgba(92, 176, 255, 0.28), 0 0 52px rgba(255, 84, 121, 0.18);
+    filter: drop-shadow(0 0 20px rgba(185, 232, 255, 0.3));
+    animation: immediateColorShift 3.6s linear infinite;
+}
+
+.hero-keyword-immediate::before,
+.hero-keyword-immediate::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.82;
+    mix-blend-mode: screen;
+}
+
+.hero-keyword-immediate::before {
+    color: rgba(122, 203, 255, 0.86);
+    text-shadow: 0 0 22px rgba(111, 197, 255, 0.7);
+    animation: immediateGlitchBlue 2.2s steps(2, end) infinite;
+}
+
+.hero-keyword-immediate::after {
+    color: rgba(255, 88, 118, 0.72);
+    text-shadow: 0 0 22px rgba(255, 88, 118, 0.58);
+    animation: immediateGlitchRed 2.2s steps(2, end) infinite reverse;
 }
 
 .hero-copy p,
@@ -754,6 +841,18 @@ button {
     border-radius: 50%;
     background: radial-gradient(circle, rgba(53, 213, 255, 0.18), transparent 72%);
     filter: blur(32px);
+}
+
+.scene-confidence .scene-glow {
+    background: radial-gradient(circle, rgba(86, 169, 255, 0.24), transparent 70%);
+}
+
+.scene-routing .scene-glow {
+    background: radial-gradient(circle, rgba(122, 240, 178, 0.18), rgba(53, 213, 255, 0.1), transparent 72%);
+}
+
+.scene-response .scene-glow {
+    background: radial-gradient(circle at 34% 42%, rgba(255, 91, 127, 0.18), transparent 46%), radial-gradient(circle at 70% 32%, rgba(53, 213, 255, 0.14), transparent 52%);
 }
 
 .scene-float-card {
@@ -1273,6 +1372,34 @@ button {
     }
 }
 
+@keyframes primaryButtonBreath {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 20px 40px rgba(17, 148, 255, 0.28);
+    }
+    50% {
+        transform: translateY(-2px) scale(1.035);
+        box-shadow: 0 26px 52px rgba(17, 148, 255, 0.34), 0 0 0 1px rgba(142, 232, 255, 0.16) inset;
+    }
+}
+
+@keyframes primaryButtonSweep {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) rotate(14deg);
+        opacity: 0;
+    }
+    18% {
+        opacity: 0.08;
+    }
+    42% {
+        opacity: 0.46;
+    }
+    62% {
+        transform: translate3d(360%, 0, 0) rotate(14deg);
+        opacity: 0;
+    }
+}
+
 @media (max-width: 768px) {
     .page-container,
     .nav-container {
@@ -1398,6 +1525,10 @@ button {
         scroll-behavior: auto !important;
     }
 }
+
+
+
+
 
 
 

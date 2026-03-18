@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --bg: #020713;
     --panel: rgba(10, 18, 34, 0.76);
     --panel-strong: rgba(8, 15, 29, 0.9);
@@ -101,7 +101,7 @@ ul {
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    filter: saturate(1) brightness(0.34) contrast(1.1);
+    filter: saturate(0.9) brightness(0.2) contrast(1.05);
     transform: scale(1.04);
     transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1), transform 1.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.95s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -109,14 +109,14 @@ ul {
 .section-video-layer.is-active {
     opacity: 1;
     transform: scale(1);
-    filter: saturate(1.06) brightness(0.44) contrast(1.12);
+    filter: saturate(0.95) brightness(0.27) contrast(1.07);
 }
 
 .section-video-overlay {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, rgba(2, 7, 18, 0.42), rgba(3, 8, 18, 0.26) 22%, rgba(4, 10, 20, 0.46) 100%),
+        linear-gradient(180deg, rgba(2, 7, 18, 0.66), rgba(3, 8, 18, 0.48) 22%, rgba(4, 10, 20, 0.7) 100%),
         radial-gradient(circle at 20% 18%, rgba(53, 213, 255, 0.08), transparent 28%),
         radial-gradient(circle at 78% 12%, rgba(17, 148, 255, 0.08), transparent 24%);
 }
@@ -266,10 +266,44 @@ ul {
 }
 
 .nav-cta,
-.button-primary {
+.button-primary:not(.nav-cta) {
     color: #06111f;
     background: linear-gradient(135deg, #8ee8ff 0%, #35d5ff 44%, #1194ff 100%);
     box-shadow: 0 20px 40px rgba(17, 148, 255, 0.28);
+}
+
+.button-primary:not(.nav-cta) {
+    animation: primaryButtonBreath 3.8s ease-in-out infinite;
+}
+
+.nav-cta::before,
+.button-primary:not(.nav-cta)::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    opacity: 0.72;
+    z-index: -1;
+}
+
+.nav-cta::before {
+    opacity: 0.44;
+}
+
+.button-primary:not(.nav-cta)::after {
+    content: "";
+    position: absolute;
+    top: -35%;
+    bottom: -35%;
+    left: -34%;
+    width: 34%;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0));
+    transform: translate3d(0, 0, 0) rotate(14deg);
+    opacity: 0;
+    animation: primaryButtonSweep 3.8s ease-in-out infinite;
 }
 
 .button-secondary {
@@ -278,8 +312,7 @@ ul {
     background: rgba(255, 255, 255, 0.03);
 }
 
-.nav-cta:hover,
-.button:hover {
+.button:not(.nav-cta):hover {
     transform: translateY(-3px);
 }
 
@@ -1107,6 +1140,9 @@ ul {
         width: 100%;
     }
 }
+
+
+
 
 
 

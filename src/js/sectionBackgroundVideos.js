@@ -78,22 +78,46 @@ export function initSectionBackgroundVideos(sectionMedia) {
     activeSource = primary.dataset.currentSrc || "";
     primary.classList.add("is-active");
 
-    var observer = new IntersectionObserver(function (entries) {
-        var visible = entries.filter(function (entry) {
-            return entry.isIntersecting;
-        }).sort(function (a, b) {
-            return b.intersectionRatio - a.intersectionRatio;
+    function pickClosestSection() {
+        var viewportCenter = window.innerHeight * 0.5;
+        var bestSection = null;
+        var bestDistance = Infinity;
+
+        sections.forEach(function (section) {
+            var rect = section.getBoundingClientRect();
+            var sectionCenter = rect.top + (rect.height * 0.5);
+            var visibleTop = Math.max(rect.top, 0);
+            var visibleBottom = Math.min(rect.bottom, window.innerHeight);
+            var visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+            if (visibleHeight <= 0) {
+                return;
+            }
+
+            var distance = Math.abs(sectionCenter - viewportCenter);
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                bestSection = section;
+            }
         });
 
-        if (visible[0]) {
-            setActiveSection(visible[0].target);
+        if (bestSection) {
+            setActiveSection(bestSection);
         }
+    }
+
+    var observer = new IntersectionObserver(function () {
+        pickClosestSection();
     }, {
-        threshold: [0.3, 0.45, 0.6, 0.75],
-        rootMargin: "-18% 0px -18% 0px"
+        threshold: [0, 0.2, 0.4, 0.6, 0.8],
+        rootMargin: "-8% 0px -8% 0px"
     });
 
     sections.forEach(function (section) {
         observer.observe(section);
     });
+
+    window.addEventListener("scroll", pickClosestSection, { passive: true });
+    window.addEventListener("resize", pickClosestSection);
+    pickClosestSection();
 }

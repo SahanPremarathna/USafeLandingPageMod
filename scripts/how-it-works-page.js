@@ -1,24 +1,24 @@
-import { initHowItWorksAnimations } from "./how-it-works-animations.js";
+﻿import { initHowItWorksAnimations } from "./how-it-works-animations.js";
 import { initHowItWorksParallax } from "./how-it-works-parallax.js";
 import { initHowItWorksNodes } from "./how-it-works-nodes.js";
 import { initHowItWorksScrollScenes } from "./how-it-works-scroll-scenes.js";
 import { initSectionBackgroundVideos } from "./section-background-videos.js";
 
 const howItWorksSectionMedia = {
-    hero: "images/bg_vids/vecteezy_cityscape-timelapse-at-night_2019801.mp4",
-    capabilities: "images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.mp4",
-    confidence: "images/bg_vids/vecteezy_an-electrocardiogram-heart-monitor-pulses-on-a-blue-grid_1622996.mp4",
+    hero: "images/bg_vids/Copyofusafeapptrailer2.webm",
+    capabilities: "images/bg_vids/Copyofusafeapptrailer2.webm",
+    confidence: "images/bg_vids/vecteezy_loop-red-emergency-flasher-with-volume-light-in-4k_40458312.webm",
     routing: "images/bg_vids/vecteezy_timelapse-of-road-traffic-or-public-transport-rush-hour_29873425.mp4",
-    response: "images/bg_vids/vecteezy_dynamic-glowing-sos-phone-icon-animation-on-black-background_78242822.mp4",
-    guardian: "images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.mp4",
-    community: "images/bg_vids/vecteezy_timelapse-hong-kong-city_3362813.mp4",
-    conclusion: "images/bg_vids/vecteezy_cityscape-timelapse-at-night_2019801.mp4"
+    response: "images/bg_vids/vecteezy_glowing-red-sos-sign-in-neon-style-on-dark-background_60852295.webm",
+    guardian: "images/bg_vids/855564-hd_1280_720_24fps.mp4",
+    community: "images/bg_vids/855564-hd_1280_720_24fps.mp4",
+    conclusion: "images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.webm"
 };
 
 const howItWorksContent = {
     hero: {
         label: "HOW USAFE WORKS",
-        title: "A layered safety system that feels immediate, readable, and actionable.",
+        title: "A layered safety system that feels Immediate.",
         body: "Each core capability is designed to work alone and together, giving users a complete safety stack instead of a single panic feature.",
         primaryCta: { label: "Try USafe", href: "contact.html" },
         secondaryCta: { label: "Meet the Team", href: "team.html" },
@@ -180,15 +180,44 @@ function renderBullets(items) {
     }).join("");
 }
 
+function splitHeadingLines(title, preferredLines) {
+    var words = String(title || "").trim().split(/\\s+/).filter(Boolean);
+    var lineCount = Math.max(1, Math.min(preferredLines || 2, words.length));
+    var lines = [];
+    var start = 0;
+
+    for (var i = 0; i < lineCount; i += 1) {
+        var remainingWords = words.length - start;
+        var remainingLines = lineCount - i;
+        var take = Math.ceil(remainingWords / remainingLines);
+        lines.push(words.slice(start, start + take).join(" "));
+        start += take;
+    }
+
+    return lines;
+}
+
+function decorateHeadingLine(line) {
+    return String(line || "").replace(/Immediate\./g, '<span class="hero-keyword-immediate" data-text="Immediate">Immediate</span>.');
+}
+
+function renderHeading(tagName, className, title, preferredLines) {
+    var lines = splitHeadingLines(title, preferredLines).map(function (line, index) {
+        return '<span class="heading-line" style="--line-index:' + String(index) + '"><span>' + decorateHeadingLine(line) + '</span></span>';
+    }).join("");
+    var classAttr = className ? ' class="' + className + '"' : '';
+    return '<' + tagName + classAttr + ' data-how-heading aria-label="' + title + '">' + lines + '</' + tagName + '>';
+}
+
 function renderCapabilities(items) {
     return items.map(function (item, index) {
         return [
-            '<article class="capability-card reveal" data-how-reveal data-how-depth data-depth-strength="' + String(index + 1) + '">',
+            '<article class="capability-card reveal" data-how-reveal data-how-delay="' + String(index * 90) + '" data-how-depth data-depth-strength="' + String(index + 1) + '">',
             '  <div class="capability-card-top">',
             '    <span class="capability-index">0' + String(index + 1) + '</span>',
             '    <div class="capability-icon"><i class="' + item.icon + '" aria-hidden="true"></i></div>',
             '  </div>',
-            '  <h3>' + item.title + '</h3>',
+            '  ' + renderHeading('h3', 'capability-heading', item.title, 2) + '',
             '  <p>' + item.body + '</p>',
             '  <div class="capability-why"><span>Why it matters</span><strong>' + item.why + '</strong></div>',
             '</article>'
@@ -203,11 +232,11 @@ function renderScene(scene, index) {
         '  <div class="page-container product-scene-shell">',
         '    <div class="scene-copy reveal" data-how-reveal>',
         '      <span class="section-kicker">' + scene.label + '</span>',
-        '      <h2>' + scene.title + '</h2>',
+        '      ' + renderHeading('h2', 'scene-heading', scene.title, 2) + '',
         '      <p>' + scene.body + '</p>',
         '      <ul class="scene-bullets">' + renderBullets(scene.bullets) + '</ul>',
         '    </div>',
-        '    <div class="scene-visual reveal" data-how-reveal data-how-depth data-depth-strength="2">',
+        '    <div class="scene-visual reveal" data-how-reveal data-how-side="' + (reverse ? 'left' : 'right') + '" data-how-depth data-depth-strength="2">',
         '      <div class="scene-visual-shell scene-' + scene.tone + '">',
         '        <div class="scene-grid"></div>',
         '        <div class="scene-glow"></div>',
@@ -307,14 +336,14 @@ function renderPage(content) {
         '  <div class="page-container hero-shell">',
         '    <div class="hero-copy reveal" data-how-reveal>',
         '      <span class="section-kicker">' + content.hero.label + '</span>',
-        '      <h1>' + content.hero.title + '</h1>',
+        '      ' + renderHeading('h1', 'hero-heading', content.hero.title, 3) + '',
         '      <p>' + content.hero.body + '</p>',
         '      <div class="hero-actions reveal" data-how-reveal data-how-delay="120">',
         '        <a class="button button-primary" href="' + content.hero.primaryCta.href + '">' + content.hero.primaryCta.label + '</a>',
         '        <a class="button button-secondary" href="' + content.hero.secondaryCta.href + '">' + content.hero.secondaryCta.label + '</a>',
         '      </div>',
         '    </div>',
-        '    <div class="hero-panel reveal" data-how-reveal data-how-delay="180" data-how-depth data-depth-strength="3">',
+        '    <div class="hero-panel reveal" data-how-reveal data-how-side="right" data-how-delay="180" data-how-depth data-depth-strength="3">',
         '      <div class="hero-panel-shell">',
         '        <div class="hero-panel-head">',
         '          <span>' + content.hero.stackLabel + '</span>',
@@ -342,7 +371,7 @@ function renderPage(content) {
         '  <div class="page-container capability-shell">',
         '    <div class="capability-copy reveal" data-how-reveal>',
         '      <span class="section-kicker">' + content.capabilities.label + '</span>',
-        '      <h2>' + content.capabilities.title + '</h2>',
+        '      ' + renderHeading('h2', 'capability-heading-main', content.capabilities.title, 2) + '',
         '      <p>' + content.capabilities.body + '</p>',
         '      <p class="section-support">' + content.capabilities.support + '</p>',
         '    </div>',
@@ -356,11 +385,11 @@ function renderPage(content) {
         '  <div class="page-container guardian-shell">',
         '    <div class="guardian-copy reveal" data-how-reveal>',
         '      <span class="section-kicker">' + content.guardian.label + '</span>',
-        '      <h2>' + content.guardian.title + '</h2>',
+        '      ' + renderHeading('h2', 'guardian-heading', content.guardian.title, 2) + '',
         '      <p>' + content.guardian.body + '</p>',
         '      <ul class="scene-bullets">' + renderBullets(content.guardian.bullets) + '</ul>',
         '    </div>',
-        '    <div class="guardian-visual reveal" data-how-reveal data-how-depth data-depth-strength="2">',
+        '    <div class="guardian-visual reveal" data-how-reveal data-how-side="right" data-how-depth data-depth-strength="2">',
         '      <div class="guardian-journey-scene">',
         '        <div class="guardian-journey-head"><span>CHECKPOINT UPDATES</span><strong>Trusted contact reassurance</strong></div>',
         '        <div class="guardian-journey-map">',
@@ -382,11 +411,11 @@ function renderPage(content) {
         '  <div class="page-container community-shell">',
         '    <div class="community-copy reveal" data-how-reveal>',
         '      <span class="section-kicker">' + content.community.label + '</span>',
-        '      <h2>' + content.community.title + '</h2>',
+        '      ' + renderHeading('h2', 'community-heading', content.community.title, 2) + '',
         '      <p>' + content.community.body + '</p>',
         '      <ul class="scene-bullets">' + renderBullets(content.community.bullets) + '</ul>',
         '    </div>',
-        '    <div class="community-visual reveal" data-how-reveal data-how-depth data-depth-strength="2">',
+        '    <div class="community-visual reveal" data-how-reveal data-how-side="right" data-how-depth data-depth-strength="2">',
         '      <div class="community-scene" data-node-scene="community">',
         '        <div class="community-grid"></div>',
         '        <div class="community-ripple ripple-a"></div>',
@@ -403,7 +432,7 @@ function renderPage(content) {
         '  <div class="page-container conclusion-shell reveal" data-how-reveal>',
         '    <div class="conclusion-copy">',
         '      <span class="section-kicker">' + content.conclusion.label + '</span>',
-        '      <h2>' + content.conclusion.title + '</h2>',
+        '      ' + renderHeading('h2', 'conclusion-heading', content.conclusion.title, 2) + '',
         '      <p>' + content.conclusion.body + '</p>',
         '      <p class="section-support">' + content.conclusion.support + '</p>',
         '      <div class="hero-actions">',
@@ -411,7 +440,7 @@ function renderPage(content) {
         '        <a class="button button-secondary" href="' + content.conclusion.secondaryCta.href + '">' + content.conclusion.secondaryCta.label + '</a>',
         '      </div>',
         '    </div>',
-        '    <div class="conclusion-visual" aria-hidden="true">',
+        '    <div class="conclusion-visual reveal" data-how-reveal data-how-side="right" data-how-delay="140" aria-hidden="true">',
         '      <div class="system-converge">',
         '        <div class="system-line system-line-a"></div>',
         '        <div class="system-line system-line-b"></div>',
@@ -442,6 +471,8 @@ function initHowItWorksPage() {
 }
 
 initHowItWorksPage();
+
+
 
 
 

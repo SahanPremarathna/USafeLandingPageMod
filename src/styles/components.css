@@ -1,4 +1,4 @@
-.glass-panel {
+﻿.glass-panel {
     position: relative;
     background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02)),
@@ -34,6 +34,7 @@
 }
 
 .button {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -43,17 +44,45 @@
     font-weight: 800;
     font-size: 0.96rem;
     letter-spacing: 0.01em;
+    overflow: hidden;
+    isolation: isolate;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
-.button:hover {
+.button:not(.nav-cta):hover {
     transform: translateY(-3px);
 }
 
-.button-primary {
+.button-primary:not(.nav-cta) {
     color: #06111f;
     background: linear-gradient(135deg, #8ee8ff 0%, #35d5ff 44%, #1194ff 100%);
     box-shadow: 0 20px 40px rgba(17, 148, 255, 0.28);
+    animation: primaryButtonBreath 3.8s ease-in-out infinite;
+}
+
+.button-primary:not(.nav-cta)::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    opacity: 0.72;
+    z-index: -1;
+}
+
+.button-primary:not(.nav-cta)::after {
+    content: "";
+    position: absolute;
+    top: -35%;
+    bottom: -35%;
+    left: -34%;
+    width: 34%;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0));
+    transform: translate3d(0, 0, 0) rotate(14deg);
+    opacity: 0;
+    animation: primaryButtonSweep 3.8s ease-in-out infinite;
 }
 
 .button-secondary {
@@ -204,6 +233,34 @@
     background: rgba(255, 255, 255, 0.09);
 }
 
+@keyframes primaryButtonBreath {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 20px 40px rgba(17, 148, 255, 0.28);
+    }
+    50% {
+        transform: translateY(-2px) scale(1.035);
+        box-shadow: 0 26px 52px rgba(17, 148, 255, 0.34), 0 0 0 1px rgba(142, 232, 255, 0.16) inset;
+    }
+}
+
+@keyframes primaryButtonSweep {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) rotate(14deg);
+        opacity: 0;
+    }
+    18% {
+        opacity: 0.08;
+    }
+    42% {
+        opacity: 0.46;
+    }
+    62% {
+        transform: translate3d(360%, 0, 0) rotate(14deg);
+        opacity: 0;
+    }
+}
+
 @media (max-width: 768px) {
     .button {
         width: 100%;
@@ -217,4 +274,16 @@
 
 
 
+
+
+@media (prefers-reduced-motion: reduce) {
+    .button-primary:not(.nav-cta) {
+        animation: none;
+    }
+
+    .button-primary:not(.nav-cta)::after {
+        animation: none;
+        opacity: 0;
+    }
+}
 

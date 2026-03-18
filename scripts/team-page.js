@@ -9,9 +9,9 @@ const teamGalleryImages = [
 ];
 
 const teamSectionMedia = {
-    hero: "images/bg_vids/vecteezy_cityscape-timelapse-at-night_2019801.mp4",
-    people: "images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.mp4",
-    narrative: "images/bg_vids/vecteezy_timelapse-hong-kong-city_3362813.mp4"
+    hero: "images/bg_vids/3255275-hd_1920_1080_25fps.webm",
+    people: "images/bg_vids/vecteezy_an-electrocardiogram-heart-monitor-pulses-on-a-blue-grid_1622996.webm",
+    narrative: "images/bg_vids/vecteezy_timelapse-hong-kong-city_3362813.webm"
 };
 
 const teamPageContent = {

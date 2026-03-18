@@ -1,6 +1,7 @@
 export function initHowItWorksAnimations(scope) {
     var root = scope || document;
-    var nodes = Array.prototype.slice.call(root.querySelectorAll("[data-how-reveal]"));
+    var revealNodes = Array.prototype.slice.call(root.querySelectorAll("[data-how-reveal]"));
+    var headingNodes = Array.prototype.slice.call(root.querySelectorAll("[data-how-heading]"));
     var scoreNodes = Array.prototype.slice.call(root.querySelectorAll("[data-score-target]"));
     var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -15,15 +16,17 @@ export function initHowItWorksAnimations(scope) {
         }
 
         var started = null;
-        var duration = 1100;
+        var duration = 1280;
 
         function step(timestamp) {
             if (!started) {
                 started = timestamp;
             }
+
             var progress = Math.min((timestamp - started) / duration, 1);
             var eased = 1 - Math.pow(1 - progress, 3);
             node.textContent = String(Math.round(target * eased));
+
             if (progress < 1) {
                 window.requestAnimationFrame(step);
             }
@@ -32,15 +35,49 @@ export function initHowItWorksAnimations(scope) {
         window.requestAnimationFrame(step);
     }
 
+    function showNode(node) {
+        var delay = Number(node.getAttribute("data-how-delay") || 0);
+        window.setTimeout(function () {
+            node.classList.add("is-visible");
+
+            if (node.hasAttribute("data-score-target")) {
+                animateScore(node);
+            }
+
+            var nestedScores = node.querySelectorAll("[data-score-target]");
+            for (var i = 0; i < nestedScores.length; i += 1) {
+                animateScore(nestedScores[i]);
+            }
+        }, delay);
+    }
+
     if (reducedMotion || !("IntersectionObserver" in window)) {
-        nodes.forEach(function (node) {
+        revealNodes.forEach(function (node) {
+            node.classList.add("is-visible");
+        });
+        headingNodes.forEach(function (node) {
             node.classList.add("is-visible");
         });
         scoreNodes.forEach(animateScore);
         return;
     }
 
-    var observer = new IntersectionObserver(function (entries, instance) {
+    // Reveal cards, panels, and supporting copy once as they enter the story flow.
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) {
+                return;
+            }
+            showNode(entry.target);
+            observer.unobserve(entry.target);
+        });
+    }, {
+        threshold: 0.16,
+        rootMargin: "0px 0px -10% 0px"
+    });
+
+    // Headings reveal independently so their split lines can resolve in sequence.
+    var headingObserver = new IntersectionObserver(function (entries, observer) {
         entries.forEach(function (entry) {
             if (!entry.isIntersecting) {
                 return;
@@ -48,22 +85,19 @@ export function initHowItWorksAnimations(scope) {
             var delay = Number(entry.target.getAttribute("data-how-delay") || 0);
             window.setTimeout(function () {
                 entry.target.classList.add("is-visible");
-                if (entry.target.hasAttribute("data-score-target")) {
-                    animateScore(entry.target);
-                }
-                var nestedScores = entry.target.querySelectorAll("[data-score-target]");
-                for (var i = 0; i < nestedScores.length; i += 1) {
-                    animateScore(nestedScores[i]);
-                }
             }, delay);
-            instance.unobserve(entry.target);
+            observer.unobserve(entry.target);
         });
     }, {
-        threshold: 0.16,
-        rootMargin: "0px 0px -12% 0px"
+        threshold: 0.32,
+        rootMargin: "0px 0px -8% 0px"
     });
 
-    nodes.forEach(function (node) {
-        observer.observe(node);
+    revealNodes.forEach(function (node) {
+        revealObserver.observe(node);
+    });
+
+    headingNodes.forEach(function (node) {
+        headingObserver.observe(node);
     });
 }

@@ -1,6 +1,6 @@
 import heroBgVideoUrl from "../../images/hero_bg.webm";
 import flyFree2VideoUrl from "../../images/homeAndSplash/FlyFree2.webm";
-import flyFree3VideoUrl from "../../images/homeAndSplash/FlyFree3.webm";
+import UsafeLogoRevealOne from "../../images/bg_vids/Copyofusafeapptrailer2.webm";
 import trailerVideoUrl from "../../images/homeAndSplash/Copy of usafe app trailer 2.webm";
 import logoMotionVideoUrl from "../../images/homeAndSplash/USafe logo 2.webm";
 
@@ -11,10 +11,10 @@ const usafeLandingContent = {
     },
     sectionMedia: {
         hero: heroBgVideoUrl,
-        problem: flyFree2VideoUrl,
-        "how-it-works": flyFree3VideoUrl,
-        vision: logoMotionVideoUrl,
-        "final-cta": trailerVideoUrl,
+        problem: UsafeLogoRevealOne,
+        "how-it-works": UsafeLogoRevealOne,
+        vision: heroBgVideoUrl,
+        "final-cta": heroBgVideoUrl,
         footer: heroBgVideoUrl
     },
     navigation: {

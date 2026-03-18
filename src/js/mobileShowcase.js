@@ -56,6 +56,9 @@ export function initMobileShowcase() {
         var ambientYaw = Math.sin(drift * 0.74) * 1.55;
         var ambientPitch = Math.sin(drift * 1.04) * 2.3;
         var driftOffsetY = Math.sin(drift * 0.86) * -12.5;
+        var driftOffsetX = Math.sin(drift * 0.58) * 14.5;
+        var interactionOffsetX = (hoverCurrentX * 9.5) + (dragCurrentYaw * 0.22);
+        var translateX = driftOffsetX + interactionOffsetX;
         var rotateY = (hoverCurrentX * 6.5) + dragCurrentYaw + ambientYaw;
         var rotateX = (hoverCurrentY * -5.2) + dragCurrentPitch + ambientPitch;
         var translateY = baseOffsetY + driftOffsetY;
@@ -66,13 +69,13 @@ export function initMobileShowcase() {
         var lightY = 18 - (rotateX * 1.4);
 
         currentScale += (targetScale - currentScale) * (isDragging ? 0.14 : 0.09);
-        frame.style.transform = "translate3d(0px, " + String(translateY.toFixed(2)) + "px, 0px) rotateX(" + String(rotateX.toFixed(2)) + "deg) rotateY(" + String(rotateY.toFixed(2)) + "deg) scale(" + String(currentScale.toFixed(3)) + ")";
+        frame.style.transform = "translate3d(" + String(translateX.toFixed(2)) + "px, " + String(translateY.toFixed(2)) + "px, 0px) rotateX(" + String(rotateX.toFixed(2)) + "deg) rotateY(" + String(rotateY.toFixed(2)) + "deg) scale(" + String(currentScale.toFixed(3)) + ")";
         frame.style.setProperty("--phone-reflection-shift", String((50 + (rotateY * 1.7)).toFixed(2)) + "%");
         frame.style.setProperty("--phone-light-x", String(lightX.toFixed(2)) + "%");
         frame.style.setProperty("--phone-light-y", String(lightY.toFixed(2)) + "%");
         frame.style.setProperty("--phone-glow-strength", String(glowStrength.toFixed(3)));
         frame.style.setProperty("--phone-shadow-scale", String(shadowScale.toFixed(3)));
-        frame.style.setProperty("--phone-shadow-shift", String((rotateY * -0.9).toFixed(2)) + "px");
+        frame.style.setProperty("--phone-shadow-shift", String(((rotateY * -0.9) - (translateX * 0.32)).toFixed(2)) + "px");
         frame.dataset.interaction = isDragging ? "dragging" : isHovering ? "hover" : "idle";
     }
 
