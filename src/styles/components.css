@@ -1,4 +1,4 @@
-﻿.glass-panel {
+.glass-panel {
     position: relative;
     background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02)),
@@ -83,6 +83,23 @@
     transform: translate3d(0, 0, 0) rotate(14deg);
     opacity: 0;
     animation: primaryButtonSweep 3.8s ease-in-out infinite;
+}
+
+.nav-cta {
+    color: #06111f;
+    background: linear-gradient(135deg, #8ee8ff 0%, #35d5ff 44%, #1194ff 100%);
+    box-shadow: 0 20px 40px rgba(17, 148, 255, 0.28);
+}
+
+.nav-cta::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    opacity: 0.44;
+    z-index: -1;
 }
 
 .button-secondary {
@@ -286,4 +303,5 @@
         opacity: 0;
     }
 }
+
 

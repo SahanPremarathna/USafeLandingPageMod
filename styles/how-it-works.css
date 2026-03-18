@@ -30,9 +30,9 @@ body {
     min-height: 100vh;
     color: var(--text);
     background:
-        radial-gradient(circle at top left, rgba(17, 148, 255, 0.18), transparent 28%),
-        radial-gradient(circle at 82% 12%, rgba(53, 213, 255, 0.12), transparent 24%),
-        linear-gradient(180deg, #030712 0%, #07111f 30%, #081221 56%, #030712 100%);
+        radial-gradient(circle at top left, rgba(17, 148, 255, 0.144), transparent 26%),
+        radial-gradient(circle at 84% 10%, rgba(53, 213, 255, 0.12), transparent 22%),
+        linear-gradient(180deg, #020713 0%, #06101d 30%, #081223 58%, #030712 100%);
     overflow-x: hidden;
 }
 
@@ -43,10 +43,10 @@ body::before {
     z-index: -1;
     pointer-events: none;
     background:
-        linear-gradient(rgba(102, 163, 255, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(102, 163, 255, 0.045) 1px, transparent 1px);
+        linear-gradient(rgba(102, 163, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(102, 163, 255, 0.04) 1px, transparent 1px);
     background-size: 88px 88px;
-    mask-image: radial-gradient(circle at center, black 40%, transparent 88%);
+    mask-image: radial-gradient(circle at center, black 42%, transparent 88%);
 }
 
 h1,
