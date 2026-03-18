@@ -1,3 +1,5 @@
+import startupLogoUrl from "../../images/usafelogo.webp";
+
 (function () {
     "use strict";
 
@@ -83,7 +85,10 @@
             return activeRun;
         }
 
-        var logoSrc = document.body.getAttribute("data-startup-logo") || "images/usafelogo.webp";
+        var configuredLogoSrc = document.body.getAttribute("data-startup-logo");
+        var logoSrc = configuredLogoSrc && /^([/.#]|https?:)/.test(configuredLogoSrc)
+            ? configuredLogoSrc
+            : startupLogoUrl;
         var overlay = createOverlay(logoSrc);
 
         document.body.classList.add("startup-active");

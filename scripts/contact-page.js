@@ -1,13 +1,17 @@
+import "../js/shared/pageLoader.js";
+import "../js/shared/navigation.js";
 import { initContactAnimations } from "./contact-animations.js";
 import { initContactInteractions } from "./contact-interactions.js";
 import { initSectionBackgroundVideos } from "./section-background-videos.js";
+import contactPulseVideoUrl from "../images/bg_vids/vecteezy_heartbeat-pulse-trace-with-purple-neon-glow-on-black-background_76737164.webm";
+import contactSupportVideoUrl from "../images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.webm";
 
 const contactSectionMedia = {
-    hero: "images/bg_vids/vecteezy_heartbeat-pulse-trace-with-purple-neon-glow-on-black-background_76737164.webm",
-    paths: "images/bg_vids/vecteezy_heartbeat-pulse-trace-with-purple-neon-glow-on-black-background_76737164.webm",
-    main: "images/bg_vids/images/bg_vids/vecteezy_heartbeat-pulse-trace-with-purple-neon-glow-on-black-background_76737164.webm",
-    support: "images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.webm",
-    cta: "images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.webm"
+    hero: contactPulseVideoUrl,
+    paths: contactPulseVideoUrl,
+    main: contactPulseVideoUrl,
+    support: contactSupportVideoUrl,
+    cta: contactSupportVideoUrl
 };
 
 const contactPageContent = {
@@ -320,6 +324,9 @@ function initContactPage() {
 }
 
 initContactPage();
+
+
+
 
 
 

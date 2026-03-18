@@ -1,17 +1,32 @@
+import "../js/shared/pageLoader.js";
+import "../js/shared/navigation.js";
 import { initTeamAnimations } from "./team-animations.js";
 import { initSectionBackgroundVideos } from "./section-background-videos.js";
+import teamGallery0Url from "../images/team-gallery/team-0.webp";
+import teamGallery6Url from "../images/team-gallery/team-6.webp";
+import teamGallery3Url from "../images/team-gallery/team-3.webp";
+import teamGallery2Url from "../images/team-gallery/team-2.webp";
+import teamHeroVideoUrl from "../images/bg_vids/3255275-hd_1920_1080_25fps.webm";
+import teamPeopleVideoUrl from "../images/bg_vids/vecteezy_an-electrocardiogram-heart-monitor-pulses-on-a-blue-grid_1622996.webm";
+import teamNarrativeVideoUrl from "../images/bg_vids/vecteezy_timelapse-hong-kong-city_3362813.webm";
+import sanukaImageUrl from "../images/developer_images/sanuka.jpg";
+import sahanImageUrl from "../images/developer_images/sahan.jpeg";
+import naveeshImageUrl from "../images/developer_images/naveesh.png";
+import yousufImageUrl from "../images/developer_images/yousuf.png";
+import vinharaImageUrl from "../images/developer_images/vinhara.jpg";
+import sithumiImageUrl from "../images/developer_images/sithumi.jpg";
 
 const teamGalleryImages = [
-    "images/team-gallery/team-0.webp",
-    "images/team-gallery/team-6.webp",
-    "images/team-gallery/team-3.webp",
-    "images/team-gallery/team-2.webp"
+    teamGallery0Url,
+    teamGallery6Url,
+    teamGallery3Url,
+    teamGallery2Url
 ];
 
 const teamSectionMedia = {
-    hero: "images/bg_vids/3255275-hd_1920_1080_25fps.webm",
-    people: "images/bg_vids/vecteezy_an-electrocardiogram-heart-monitor-pulses-on-a-blue-grid_1622996.webm",
-    narrative: "images/bg_vids/vecteezy_timelapse-hong-kong-city_3362813.webm"
+    hero: teamHeroVideoUrl,
+    people: teamPeopleVideoUrl,
+    narrative: teamNarrativeVideoUrl
 };
 
 const teamPageContent = {
@@ -31,7 +46,7 @@ const teamPageContent = {
                 name: "Sanuka Pathiraja",
                 role: "Full Stack Developer",
                 line: "Focused on clarity in high-pressure situations.",
-                image: "images/developer_images/sanuka.jpg",
+                image: sanukaImageUrl,
                 github: "https://github.com/Sanuka-Pathiraja?tab=overview&from=2026-01-01&to=2026-01-20",
                 linkedin: "https://www.linkedin.com/in/sanuka-pathiraja-4539b3330/"
             },
@@ -39,7 +54,7 @@ const teamPageContent = {
                 name: "Sahan Premarathna",
                 role: "Full Stack Developer",
                 line: "Designing systems that think before users react.",
-                image: "images/developer_images/sahan.jpeg",
+                image: sahanImageUrl,
                 github: "https://github.com/SahanPremarathna",
                 linkedin: "https://www.linkedin.com/in/sahan-premarathna/"
             },
@@ -47,7 +62,7 @@ const teamPageContent = {
                 name: "Naveesh Abeydheera",
                 role: "Full Stack Developer",
                 line: "Building dependable logic for uncertain real-world journeys.",
-                image: "images/developer_images/naveesh.png",
+                image: naveeshImageUrl,
                 github: "https://github.com/Navi2004725",
                 linkedin: "https://www.linkedin.com/in/naveesh-abeydheera-a92511332/"
             },
@@ -55,7 +70,7 @@ const teamPageContent = {
                 name: "Yousuf Nizam",
                 role: "Front End & ML Developer",
                 line: "Shaping product behavior around confidence and precision.",
-                image: "images/developer_images/yousuf.png",
+                image: yousufImageUrl,
                 github: "https://github.com/YousufNizam",
                 linkedin: "https://www.linkedin.com/in/yousuf-nizam-428b22334/"
             },
@@ -63,7 +78,7 @@ const teamPageContent = {
                 name: "Vinhara Perera",
                 role: "Front End & ML Developer",
                 line: "Translating intelligent systems into calm, usable interfaces.",
-                image: "images/developer_images/vinhara.jpg",
+                image: vinharaImageUrl,
                 github: "https://github.com/vinhara",
                 linkedin: "https://www.linkedin.com/in/vinhara-perera-0872b0351/"
             },
@@ -71,7 +86,7 @@ const teamPageContent = {
                 name: "Sithumi Palihena",
                 role: "Front End & ML Developer",
                 line: "Creating readable experiences for moments that matter.",
-                image: "images/developer_images/sithumi.jpg",
+                image: sithumiImageUrl,
                 github: "https://github.com/SithumiPalihena",
                 linkedin: "https://www.linkedin.com/in/sithumi-palihena-565799346/"
             }
@@ -298,6 +313,9 @@ function initTeamPage() {
 }
 
 initTeamPage();
+
+
+
 
 
 

@@ -1,19 +1,27 @@
-﻿import { initHowItWorksAnimations } from "./how-it-works-animations.js";
+import "../js/shared/pageLoader.js";
+import "../js/shared/navigation.js";
+import { initHowItWorksAnimations } from "./how-it-works-animations.js";
 import { initHowItWorksParallax } from "./how-it-works-parallax.js";
 import { initHowItWorksNodes } from "./how-it-works-nodes.js";
 import { initHowItWorksScrollScenes } from "./how-it-works-scroll-scenes.js";
 import { initLayeredSafetyStack } from "./layered-safety-stack.js";
 import { initSectionBackgroundVideos } from "./section-background-videos.js";
+import howHeroVideoUrl from "../images/bg_vids/Copyofusafeapptrailer2.webm";
+import howConfidenceVideoUrl from "../images/bg_vids/vecteezy_loop-red-emergency-flasher-with-volume-light-in-4k_40458312.webm";
+import howRoutingVideoUrl from "../images/bg_vids/vecteezy_timelapse-of-road-traffic-or-public-transport-rush-hour_29873425.mp4";
+import howResponseVideoUrl from "../images/bg_vids/vecteezy_glowing-red-sos-sign-in-neon-style-on-dark-background_60852295.webm";
+import howGuardianVideoUrl from "../images/bg_vids/855564-hd_1280_720_24fps.mp4";
+import howConclusionVideoUrl from "../images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.webm";
 
 const howItWorksSectionMedia = {
-    hero: "images/bg_vids/Copyofusafeapptrailer2.webm",
-    capabilities: "images/bg_vids/Copyofusafeapptrailer2.webm",
-    confidence: "images/bg_vids/vecteezy_loop-red-emergency-flasher-with-volume-light-in-4k_40458312.webm",
-    routing: "images/bg_vids/vecteezy_timelapse-of-road-traffic-or-public-transport-rush-hour_29873425.mp4",
-    response: "images/bg_vids/vecteezy_glowing-red-sos-sign-in-neon-style-on-dark-background_60852295.webm",
-    guardian: "images/bg_vids/855564-hd_1280_720_24fps.mp4",
-    community: "images/bg_vids/855564-hd_1280_720_24fps.mp4",
-    conclusion: "images/bg_vids/vecteezy_global-network-medical-healthcare-system-protection-concept_4747818.webm"
+    hero: howHeroVideoUrl,
+    capabilities: howHeroVideoUrl,
+    confidence: howConfidenceVideoUrl,
+    routing: howRoutingVideoUrl,
+    response: howResponseVideoUrl,
+    guardian: howGuardianVideoUrl,
+    community: howGuardianVideoUrl,
+    conclusion: howConclusionVideoUrl
 };
 
 const howItWorksContent = {
@@ -501,6 +509,9 @@ function initHowItWorksPage() {
 }
 
 initHowItWorksPage();
+
+
+
 
 
 
