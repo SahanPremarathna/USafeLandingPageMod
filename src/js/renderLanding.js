@@ -144,7 +144,7 @@ function renderFooterColumns(columns) {
 function renderSocials(socials) {
     return socials.map(function (social) {
         return [
-            '<a href="', social.href, '" aria-label="', social.label, '">',
+            '<a href="', social.href, '" target="_blank" rel="noopener noreferrer" aria-label="', social.label, '">',
             '  <i class="', social.icon, '" aria-hidden="true"></i>',
             '</a>'
         ].join("");

@@ -155,9 +155,9 @@ const usafeLandingContent = {
             }
         ],
         socials: [
-            { label: "YouTube", href: "#", icon: "fa-brands fa-youtube" },
-            { label: "GitHub", href: "#", icon: "fa-brands fa-github" },
-            { label: "LinkedIn", href: "https://www.linkedin.com/company/team-usafe/?viewAsMember=true", icon: "fa-brands fa-linkedin-in" }
+            { label: "YouTube", href: "https://youtu.be/Ihp_Uo9KIIQ?si=m24_tcEkq2BqvBkf", icon: "fa-brands fa-youtube" },
+            { label: "LinkedIn", href: "https://www.linkedin.com/company/team-usafe/?viewAsMember=true", icon: "fa-brands fa-linkedin-in" },
+            { label: "Instagram", href: "https://www.instagram.com/itsusafe/", icon: "fa-brands fa-instagram" }
         ],
         copyright: "(c) 2026 USafe. Safety-first navigation for modern cities."
     }
