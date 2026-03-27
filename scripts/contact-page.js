@@ -1,5 +1,6 @@
 import "../js/shared/pageLoader.js";
 import "../js/shared/navigation.js";
+import { initSectionNav } from "../js/shared/sectionNav.js";
 import { initContactAnimations } from "./contact-animations.js";
 import { initContactInteractions } from "./contact-interactions.js";
 import { initSectionBackgroundVideos } from "./section-background-videos.js";
@@ -324,6 +325,7 @@ function initContactPage() {
 }
 
 initContactPage();
+initSectionNav();
 
 
 

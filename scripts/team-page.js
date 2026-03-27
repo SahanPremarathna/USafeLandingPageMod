@@ -1,5 +1,6 @@
 import "../js/shared/pageLoader.js";
 import "../js/shared/navigation.js";
+import { initSectionNav } from "../js/shared/sectionNav.js";
 import { initTeamAnimations } from "./team-animations.js";
 import { initSectionBackgroundVideos } from "./section-background-videos.js";
 import teamGallery0Url from "../images/team-gallery/team-0.webp";
@@ -313,6 +314,7 @@ function initTeamPage() {
 }
 
 initTeamPage();
+initSectionNav();
 
 
 
