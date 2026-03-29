@@ -16,6 +16,7 @@ import heroPosterUrl from "../../images/pre_load_hero_bg.webp";
 import heroWebmUrl from "../../images/hero_bg.webm";
 import { runStartupSequence, showPageTransitionSplash } from "./startupSplash.js";
 import { initDownloadModal } from "../../scripts/downloadModal.js";
+import { initSectionNav } from "../../js/shared/sectionNav.js";
 
 function applyMeta(meta) {
     document.title = meta.title;
@@ -35,7 +36,8 @@ function loadExperienceModules() {
         import("./guardianSection.js"),
         import("./whyUsafeSection.js"),
         import("./sectionSnap.js"),
-        import("./sectionBackgroundVideos.js")
+        import("./sectionBackgroundVideos.js"),
+        import("./videoReveal.js")
     ]);
 }
 
@@ -51,6 +53,7 @@ async function initExperience(modules) {
     var whyUsafeSection = modules[6];
     var sectionSnap = modules[7];
     var sectionBackgroundVideos = modules[8];
+    var videoReveal = modules[9];
     var lineEl = document.querySelector("[data-typed-line]");
     var backgroundController = heroBackgroundController.initHeroBackgroundController();
 
@@ -72,6 +75,8 @@ async function initExperience(modules) {
     whyUsafeSection.initWhyUsafeSection(lenis);
     sectionSnap.initSectionSnap(lenis);
     sectionBackgroundVideos.initSectionBackgroundVideos(usafeLandingContent.sectionMedia);
+    videoReveal.initVideoReveal(lenis);
+    initSectionNav(lenis);
 }
 
 async function boot() {

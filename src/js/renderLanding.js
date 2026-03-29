@@ -144,7 +144,7 @@ function renderFooterColumns(columns) {
 function renderSocials(socials) {
     return socials.map(function (social) {
         return [
-            '<a href="', social.href, '" aria-label="', social.label, '">',
+            '<a href="', social.href, '" target="_blank" rel="noopener noreferrer" aria-label="', social.label, '">',
             '  <i class="', social.icon, '" aria-hidden="true"></i>',
             '</a>'
         ].join("");
@@ -219,6 +219,23 @@ export function renderLanding(root, content) {
         '              <div class="mobile-device-shadow" aria-hidden="true"></div>',
         '            </div>',
         '          </div>',
+        '        </div>',
+        '      </div>',
+        '    </section>',
+        '    <section class="video-reveal-section story-section" id="intro-video" data-video-reveal-section>',
+        '      <div class="container video-reveal-container">',
+        '        <div class="video-reveal-label" data-video-reveal-label>',
+        '          <span class="eyebrow">See It In Action</span>',
+        '        </div>',
+        '        <div class="video-reveal-frame glass-panel" data-video-reveal-wrapper>',
+        '          <iframe',
+        '            data-video-reveal-iframe',
+        '            data-src="https://www.youtube-nocookie.com/embed/Ihp_Uo9KIIQ?autoplay=1&mute=1&loop=1&playlist=Ihp_Uo9KIIQ&rel=0&modestbranding=1&enablejsapi=1&playsinline=1"',
+        '            allow="autoplay; encrypted-media; picture-in-picture"',
+        '            allowfullscreen',
+        '            title="USafe — See how it works"',
+        '            frameborder="0"',
+        '          ></iframe>',
         '        </div>',
         '      </div>',
         '    </section>',

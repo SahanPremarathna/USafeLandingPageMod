@@ -1,5 +1,6 @@
 import "../js/shared/pageLoader.js";
 import "../js/shared/navigation.js";
+import { initSectionNav } from "../js/shared/sectionNav.js";
 import { initHowItWorksAnimations } from "./how-it-works-animations.js";
 import { initHowItWorksParallax } from "./how-it-works-parallax.js";
 import { initHowItWorksNodes } from "./how-it-works-nodes.js";
@@ -509,6 +510,7 @@ function initHowItWorksPage() {
 }
 
 initHowItWorksPage();
+initSectionNav();
 
 
 

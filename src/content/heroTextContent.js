@@ -1,7 +1,7 @@
-import dangerScreenUrl from "../assets/mockups/danger.svg";
-import riskScreenUrl from "../assets/mockups/risk.svg";
-import pathScreenUrl from "../assets/mockups/path.svg";
-import helpScreenUrl from "../assets/mockups/help.svg";
+import dangerScreenUrl from "../assets/mockups/sosf.png";
+import riskScreenUrl from "../assets/mockups/safetyf.png";
+import pathScreenUrl from "../assets/mockups/navf.png";
+import helpScreenUrl from "../assets/mockups/processf.png";
 
 export var heroTextContent = [
     {

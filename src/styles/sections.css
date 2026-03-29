@@ -1,3 +1,47 @@
+/* ── Video Reveal Section ───────────────────────────────────────────── */
+.video-reveal-section {
+    padding: 72px 0 96px;
+    overflow: clip;
+}
+
+.video-reveal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+.video-reveal-label {
+    text-align: center;
+}
+
+.video-reveal-frame {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(104, 190, 255, 0.08);
+    will-change: opacity, transform;
+}
+
+.video-reveal-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .video-reveal-section {
+        padding: 48px 0 64px;
+    }
+}
+
+/* ── Hero Section ───────────────────────────────────────────────────── */
 .hero-section {
     min-height: auto;
     display: flex;

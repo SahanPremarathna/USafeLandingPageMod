@@ -1,0 +1,98 @@
+/* ── Section Navigation Button ──────────────────────────────────────── */
+
+.section-nav-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 800;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(104, 190, 255, 0.18);
+    background: rgba(6, 14, 30, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: rgba(159, 223, 255, 0.88);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    /* entrance: hidden until JS adds .is-visible */
+    opacity: 0;
+    transform: translateY(14px) scale(0.92);
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1),
+        border-color 0.22s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease;
+
+    /* block text-selection on rapid clicks */
+    user-select: none;
+    -webkit-user-select: none;
+
+    /* prevent iOS callout on long press */
+    -webkit-touch-callout: none;
+}
+
+.section-nav-btn.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.section-nav-btn:hover {
+    border-color: rgba(104, 190, 255, 0.34);
+    background: rgba(10, 22, 50, 0.9);
+    box-shadow: 0 0 18px rgba(53, 213, 255, 0.1), 0 4px 20px rgba(0, 0, 0, 0.38);
+}
+
+.section-nav-btn:focus-visible {
+    outline: 2px solid rgba(53, 213, 255, 0.55);
+    outline-offset: 3px;
+}
+
+.section-nav-btn:active,
+.section-nav-btn.is-clicking {
+    transform: scale(0.9);
+    transition-duration: 0.1s;
+}
+
+/* keep scale(1) baseline after .is-visible when active */
+.section-nav-btn.is-visible:active,
+.section-nav-btn.is-visible.is-clicking {
+    transform: translateY(0) scale(0.9);
+}
+
+/* ── Arrow icon ─────────────────────────────────────────────────────── */
+
+.section-nav-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    pointer-events: none;
+    /* springy flip */
+    transition: transform 0.42s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+/* up state: flip arrow 180° */
+.section-nav-btn.is-up .section-nav-icon {
+    transform: rotate(180deg);
+}
+
+/* ── Mobile adjustments ─────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+    .section-nav-btn {
+        bottom: 22px;
+        right: 18px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .section-nav-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
