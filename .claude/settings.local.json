@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find e:VsProjectsUSafeLandingPageMod -type f -name *contact* -o -name *modal* -o -name *popup*)"
+    ]
+  }
+}

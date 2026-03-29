@@ -15,6 +15,7 @@ import logoUrl from "../../images/usafelogo.webp";
 import heroPosterUrl from "../../images/pre_load_hero_bg.webp";
 import heroWebmUrl from "../../images/hero_bg.webm";
 import { runStartupSequence, showPageTransitionSplash } from "./startupSplash.js";
+import { initDownloadModal } from "../../scripts/downloadModal.js";
 
 function applyMeta(meta) {
     document.title = meta.title;
@@ -84,6 +85,7 @@ async function boot() {
     applyMeta(usafeLandingContent.meta);
     document.body.classList.add("theme-usafe");
     renderLanding(app, usafeLandingContent);
+    initDownloadModal();
 
     window.addEventListener("pageshow", function (event) {
         if (event.persisted) {

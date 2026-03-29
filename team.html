@@ -88,13 +88,17 @@ html.page-startup-pending body > :not(.startup-overlay) {
                     <li><a href="team.html" data-page="team">Team</a></li>
                     <li><a href="contact.html" data-page="contact">Contact</a></li>
                 </ul>
-                <a class="nav-cta" href="contact.html">Try USafe</a>
+                <button class="nav-cta" data-download-cta type="button" style="border:none;cursor:pointer;font-family:inherit;">Try USafe</button>
             </div>
         </div>
     </nav>
 
     <main id="team-root" class="team-page"></main>
     <script type="module" src="scripts/team-page.js"></script>
+    <script type="module">
+        import { initDownloadModal } from "./scripts/downloadModal.js";
+        initDownloadModal();
+    </script>
 
     <footer class="site-footer">
         <div class="nav-container footer-layout">
@@ -104,6 +108,9 @@ html.page-startup-pending body > :not(.startup-overlay) {
                     <span>USafe</span>
                 </a>
                 <p>Proactive AI-guided safety navigation built for real movement in real cities.</p>
+                <button class="footer-download-cta" data-download-cta type="button" style="border:none;cursor:pointer;font-family:inherit;">
+                    <i class="fa-solid fa-download" aria-hidden="true"></i> Try USafe
+                </button>
             </div>
             <div class="footer-columns">
                 <div class="footer-column">
