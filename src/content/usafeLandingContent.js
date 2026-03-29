@@ -31,7 +31,7 @@ const usafeLandingContent = {
         titlePrefix: "See the",
         title: "See the danger before it sees you.",
         description: "USafe predicts risky areas, guides safer routes, and keeps trusted guardians aware of your journey in real time.",
-        primaryCta: { label: "Start Safer Journeys", href: "contact.html" },
+        primaryCta: { label: "Start Safer Journeys", href: "#intro-video" },
         secondaryCta: { label: "See How It Works", href: "how-it-works.html" },
         trustLine: "Built for modern cities. Designed for real people.",
         stats: [],

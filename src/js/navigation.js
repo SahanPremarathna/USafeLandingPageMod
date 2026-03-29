@@ -2,7 +2,7 @@ export function initNavigation(lenis) {
     var nav = document.getElementById("site-nav");
     var toggle = document.getElementById("nav-toggle");
     var menu = document.getElementById("nav-menu");
-    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a, .nav-cta"));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a, .nav-cta, .hero-actions a"));
     var pageLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
     var lastScrollY = window.scrollY;
     var hideThreshold = 220;
